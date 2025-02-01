@@ -86,7 +86,6 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-//  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
 
   /* USER CODE END SysInit */
@@ -96,9 +95,8 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-//  uint8_t button_status = 0;
-  uint8_t led_toggler = 1;
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+  uint8_t led_toggler = 1;
   uint16_t brightness = 0;
   /* USER CODE END 2 */
 
@@ -109,50 +107,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	//	  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-	//	  HAL_Delay(1000);
-	//	  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-	//	  HAL_Delay(1000);
-
-	//	  button_status = HAL_GPIO_ReadPin(B1_button_GPIO_Port, B1_button_Pin);
-	//	  if(button_status == 0){
-	//		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-	//	  }else{
-	//		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-	//	  }
-//	  if(HAL_GPIO_ReadPin(B1_button_GPIO_Port, B1_button_Pin) == 0 && led_toggler == 1){
-//		  HAL_Delay(5);
-//		  if(HAL_GPIO_ReadPin(B1_button_GPIO_Port, B1_button_Pin) == 0){
-////			  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-////			  HAL_GPIO_TogglePin(D9_GPIO_Port, D9_Pin);
-//			  HAL_GPIO_TogglePin(PB4_GPIO_Port, PB4_Pin);
-//			  led_toggler = 0;
-//		  }
-//	  }else if(HAL_GPIO_ReadPin(B1_button_GPIO_Port, B1_button_Pin) == 1){
-//		  led_toggler = 1;
-//	  }
-//	  brightness = 65534;
-//	  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, brightness);
-//	  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
-//	  HAL_Delay(5000);
-//	  brightness = 2;
-//	  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, brightness);
-//	  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
-//	  HAL_Delay(5000);
-//	  for(int i=0; i<255; i++){
-//		  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, i);
-//		  HAL_Delay(5);
-//	  }
-//	  for(int i=255; i>0; i--){
-//		  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, i);
-//		  HAL_Delay(5);
-//	  }
 	  if(HAL_GPIO_ReadPin(B1_button_GPIO_Port, B1_button_Pin) == 0 && led_toggler == 1){
 		  HAL_Delay(5);
 		  if(HAL_GPIO_ReadPin(B1_button_GPIO_Port, B1_button_Pin) == 0){
   			  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-  //			  HAL_GPIO_TogglePin(D9_GPIO_Port, D9_Pin);
-//			  HAL_GPIO_TogglePin(PB4_GPIO_Port, PB4_Pin);
 			  brightness += 50;
 			  if(brightness >= 255){
 				  brightness = 0;
