@@ -61,7 +61,24 @@ static void MX_I2C1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint8_t ReadChar(void)
+{
+	uint8_t val;
+	while(!(USART2->SR & (1<<5)));
+	val = USART2->DR;
+	return val;
+}
 
+void SendChar(uint8_t c)
+{
+	USART2->DR = c;
+	while(!(USART2->SR & (1<<6)));
+}
+
+void SendString(char* string)
+{
+	while(*string) SendChar(*string++);
+}
 /* USER CODE END 0 */
 
 /**
@@ -98,6 +115,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   uint8_t MSG[40] = {'\0'};
+  uint8_t inVal;
 
 //  char temp_str[10];
 //  uint16_t CounterTicks = 0;
@@ -126,52 +144,69 @@ int main(void)
 //	  CounterTicks2 = TIM3->CNT;
 //	  CounterTicks3 = CounterTicks2 - CounterTicks;
 
-	  time_taken = time_to_add_32();
-	  sprintf(MSG, "32 add time = %d\n\r", time_taken);
-	  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-	  memset(MSG, 0, sizeof(MSG));
+	  SendString("Enter 1 to get timings for different calculations\n\r");
+	  SendString("Enter 2 to read RCC registers\n\r");
 
-	  time_taken = time_to_add_64();
-	  sprintf(MSG, "64 add time = %d\n\r", time_taken);
-	  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-	  memset(MSG, 0, sizeof(MSG));
+	  inVal = ReadChar();
+	  sprintf(MSG, "Entered = %c\n\r", inVal);
+	  SendString(MSG);
 
-	  time_taken = time_to_mul_32();
-	  sprintf(MSG, "32 mul time = %d\n\r", time_taken);
-	  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-	  memset(MSG, 0, sizeof(MSG));
+	  if(inVal == 49)
+	  {
+		  SendString("Generating timings for different calculations\n\r");
+		  time_taken = time_to_add_32();
+		  sprintf(MSG, "32 add time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
 
-	  time_taken = time_to_mul_64();
-	  sprintf(MSG, "64 mul time = %d\n\r", time_taken);
-	  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-	  memset(MSG, 0, sizeof(MSG));
+		  time_taken = time_to_add_64();
+		  sprintf(MSG, "64 add time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
 
-	  time_taken = time_to_div_32();
-	  sprintf(MSG, "32 div time = %d\n\r", time_taken);
-	  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-	  memset(MSG, 0, sizeof(MSG));
+		  time_taken = time_to_mul_32();
+		  sprintf(MSG, "32 mul time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
 
-	  time_taken = time_to_div_64();
-	  sprintf(MSG, "64 div time = %d\n\r", time_taken);
-	  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-	  memset(MSG, 0, sizeof(MSG));
+		  time_taken = time_to_mul_64();
+		  sprintf(MSG, "64 mul time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
 
-	  time_taken = time_to_copy_8B();
-	  sprintf(MSG, "8B cp time = %d\n\r", time_taken);
-	  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-	  memset(MSG, 0, sizeof(MSG));
+		  time_taken = time_to_div_32();
+		  sprintf(MSG, "32 div time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
 
-	  time_taken = time_to_copy_128B();
-	  sprintf(MSG, "128B cp time = %d\n\r", time_taken);
-	  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-	  memset(MSG, 0, sizeof(MSG));
+		  time_taken = time_to_div_64();
+		  sprintf(MSG, "64 div time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
 
-	  time_taken = time_to_copy_1024B();
-	  sprintf(MSG, "1024B cp time = %d\n\r", time_taken);
-	  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-	  memset(MSG, 0, sizeof(MSG));
+		  time_taken = time_to_copy_8B();
+		  sprintf(MSG, "8B cp time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
 
-	  HAL_Delay(500);
+		  time_taken = time_to_copy_128B();
+		  sprintf(MSG, "128B cp time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  time_taken = time_to_copy_1024B();
+		  sprintf(MSG, "1024B cp time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+	  }
+	  else if (inVal == 50)
+	  {
+		  SendString("Reading RCC registers\n\r");
+	  }
+
+	  SendString("Completed!\n\r");
+	  SendString("\n\r");
+//	  HAL_Delay(500);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
