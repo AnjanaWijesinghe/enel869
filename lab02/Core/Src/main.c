@@ -202,6 +202,57 @@ int main(void)
 	  else if (inVal == 50)
 	  {
 		  SendString("Reading RCC registers\n\r");
+		  uint32_t reg_val;
+
+		  reg_val = RCC->CR;
+		  SendString("Clock control register which is used to set the clock flags\n\r");
+		  sprintf(MSG, "RCC->CR: %X\n\r", reg_val);
+		  SendString(MSG);
+
+		  reg_val = RCC->CFGR;
+		  SendString("Clock configuration register which is used to set prescalers to adjust clock speeds\n\r");
+		  sprintf(MSG, "RCC->CFGR: %X\n\r", reg_val);
+		  SendString(MSG);
+
+		  reg_val = RCC->CIR;
+		  SendString("Clock interrupt register which is used what types of clock interrupts are enabled\n\r");
+		  sprintf(MSG, "RCC->CIR: %X\n\r", reg_val);
+		  SendString(MSG);
+
+		  reg_val = RCC->APB2RSTR;
+		  SendString("APB2 peripheral reset register which is used to set and reset clock timers\n\r");
+		  sprintf(MSG, "RCC->APB2RSTR: %X\n\r", reg_val);
+		  SendString(MSG);
+
+		  reg_val = RCC->APB1RSTR;
+		  SendString("APB1 peripheral reset register which is used to reset communication connections and windowed watchdog and other timers\n\r");
+		  sprintf(MSG, "RCC->APB1RSTR: %X\n\r", reg_val);
+		  SendString(MSG);
+
+		  reg_val = RCC->AHBENR;
+		  SendString("APB pheripheral clock enable register which  is used to enable pheripheral clocks\n\r");
+		  sprintf(MSG, "RCC->AHBENR: %X\n\r", reg_val);
+		  SendString(MSG);
+
+		  reg_val = RCC->APB2ENR;
+		  SendString("APB2 pheripheral clock enable register which is used to enable pheripheral clocks including IO\n\r");
+		  sprintf(MSG, "RCC->APB2ENR %X\n\r", reg_val);
+		  SendString(MSG);
+
+		  reg_val = RCC->APB1ENR;
+		  SendString("APB1 pheripheral clock enable register which is used to enable clocks to communication pheripherals\n\r");
+		  sprintf(MSG, "RCC->APB1ENR %X\n\r", reg_val);
+		  SendString(MSG);
+
+		  reg_val = RCC->BDCR;
+		  SendString("Backup domain control register, used to enable main RTC and select clock source\n\r");
+		  sprintf(MSG, "RCC->BDCR %X\n\r", reg_val);
+		  SendString(MSG);
+
+		  reg_val = RCC->CSR;
+		  SendString("Control status register, used to control reset requirements\n\r");
+		  sprintf(MSG, "RCC->CSR %X\n\r", reg_val);
+		  SendString(MSG);
 	  }
 
 	  SendString("Completed!\n\r");
