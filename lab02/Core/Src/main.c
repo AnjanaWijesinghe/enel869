@@ -79,6 +79,11 @@ void SendString(char* string)
 {
 	while(*string) SendChar(*string++);
 }
+
+uint16_t TimeTakenInNs(uint16_t t)
+{
+	return (uint16_t)((t *1000) / 72);
+}
 /* USER CODE END 0 */
 
 /**
@@ -155,46 +160,55 @@ int main(void)
 	  {
 		  SendString("Generating timings for different calculations\n\r");
 		  time_taken = time_to_add_32();
+		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "32 add time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_add_64();
+		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "64 add time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_mul_32();
+		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "32 mul time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_mul_64();
+		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "64 mul time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_div_32();
+		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "32 div time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_div_64();
+		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "64 div time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_copy_8B();
+		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "8B cp time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_copy_128B();
+		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "128B cp time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_copy_1024B();
+		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "1024B cp time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
