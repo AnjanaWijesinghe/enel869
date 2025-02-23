@@ -1,5 +1,6 @@
 #include "operators.h"
 #include "timer_impl.h"
+#include "main.h"
 
 #include <time.h>
 #include <stdlib.h>
@@ -56,13 +57,17 @@ uint16_t time_to_add_32(void)
 
 		timer_init();
 		CounterTicks = timer_start();
-		testValue3 = testValue2 + testValue1;
+		HAL_GPIO_WritePin(GPIOA, PA8_Pin, GPIO_PIN_SET);
+//		testValue3 = testValue2 + testValue1;
+		testValue2 += testValue1;
+		HAL_GPIO_WritePin(GPIOA, PA8_Pin, GPIO_PIN_RESET);
 		CounterTicks2 = timer_stop(CounterTicks);
 		timer_shutdown();
 		time_sum += CounterTicks2;
+		break;
 	}
 
-	time_sum /= 100;
+//	time_sum /= 100;
 
 	return time_sum;
 }
@@ -84,13 +89,16 @@ uint16_t time_to_add_64(void)
 
 		timer_init();
 		CounterTicks = timer_start();
+		HAL_GPIO_WritePin(GPIOA, PA8_Pin, GPIO_PIN_SET);
 		testValue3 = testValue2 + testValue1;
+		HAL_GPIO_WritePin(GPIOA, PA8_Pin, GPIO_PIN_RESET);
 		CounterTicks2 = timer_stop(CounterTicks);
 		timer_shutdown();
 		time_sum += CounterTicks2;
+		break;
 	}
 
-	time_sum /= 100;
+//	time_sum /= 100;
 
 	return time_sum;
 }
@@ -258,14 +266,16 @@ uint16_t time_to_copy_8B(void)
 		timer_init();
 		CounterTicks = timer_start();
 
+		HAL_GPIO_WritePin(GPIOA, PA8_Pin, GPIO_PIN_SET);
 		b8Copy = b8;
-
+		HAL_GPIO_WritePin(GPIOA, PA8_Pin, GPIO_PIN_RESET);
 		CounterTicks2 = timer_stop(CounterTicks);
 		timer_shutdown();
 		time_sum += CounterTicks2;
+		break;
 	}
 
-	time_sum /= 100;
+//	time_sum /= 100;
 
 	return time_sum;
 }
@@ -289,14 +299,16 @@ uint16_t time_to_copy_128B(void)
 		timer_init();
 		CounterTicks = timer_start();
 
+		HAL_GPIO_WritePin(GPIOA, PA8_Pin, GPIO_PIN_SET);
 		b128Copy = b128;
-
+		HAL_GPIO_WritePin(GPIOA, PA8_Pin, GPIO_PIN_RESET);
 		CounterTicks2 = timer_stop(CounterTicks);
 		timer_shutdown();
 		time_sum += CounterTicks2;
+		break;
 	}
 
-	time_sum /= 100;
+//	time_sum /= 100;
 
 	return time_sum;
 }
@@ -319,15 +331,16 @@ uint16_t time_to_copy_1024B(void)
 
 		timer_init();
 		CounterTicks = timer_start();
-
+		HAL_GPIO_WritePin(GPIOA, PA8_Pin, GPIO_PIN_SET);
 		b1024Copy = b1024;
-
+		HAL_GPIO_WritePin(GPIOA, PA8_Pin, GPIO_PIN_RESET);
 		CounterTicks2 = timer_stop(CounterTicks);
 		timer_shutdown();
 		time_sum += CounterTicks2;
+		break;
 	}
 
-	time_sum /= 100;
+//	time_sum /= 100;
 
 	return time_sum;
 }

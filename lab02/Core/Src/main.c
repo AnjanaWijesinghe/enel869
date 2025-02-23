@@ -123,16 +123,8 @@ int main(void)
   uint8_t inVal;
 
 //  char temp_str[10];
-//  uint16_t CounterTicks = 0;
-//  uint16_t CounterTicks2 = 0;
-
-//  volatile uint32_t testValue1 = 0;
-//  volatile uint32_t testValue2 = 0;
-//  volatile uint32_t testValue3 = 0;
-
-//  volatile uint8_t testValue1 = 0;
-//  volatile uint8_t testValue2 = 0;
-//  volatile uint8_t testValue3 = 0;
+  uint16_t CounterTicks = 0;
+  uint16_t CounterTicks2 = 0;
 
   uint16_t time_taken;
   double elapsedtime;
@@ -151,6 +143,12 @@ int main(void)
 
 	  SendString("Enter 1 to get timings for different calculations\n\r");
 	  SendString("Enter 2 to read RCC registers\n\r");
+	  SendString("Enter 3 to get timings for 32 int add\n\r");
+	  SendString("Enter 4 to get timings for 64 int add\n\r");
+	  SendString("Enter 5 to get timings for 8B copy\n\r");
+	  SendString("Enter 6 to get timings for 128B copy\n\r");
+	  SendString("Enter 7 to get timings for 1024B copy\n\r");
+
 
 	  inVal = ReadChar();
 	  sprintf(MSG, "Entered = %c\n\r", inVal);
@@ -158,57 +156,69 @@ int main(void)
 
 	  if(inVal == 49)
 	  {
+		  volatile uint32_t a = gen_rand_32();
+		  volatile uint32_t b = gen_rand_32();
+
+		  timer_init();
+		  CounterTicks = TIM3->CNT;
+		  b += a;
+		  time_taken = TIM3->CNT - CounterTicks;
+		  sprintf(MSG, "32 add time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+
 		  SendString("Generating timings for different calculations\n\r");
 		  time_taken = time_to_add_32();
-		  time_taken = TimeTakenInNs(time_taken);
+//		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "32 add time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_add_64();
-		  time_taken = TimeTakenInNs(time_taken);
+//		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "64 add time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_mul_32();
-		  time_taken = TimeTakenInNs(time_taken);
+//		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "32 mul time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_mul_64();
-		  time_taken = TimeTakenInNs(time_taken);
+//		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "64 mul time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_div_32();
-		  time_taken = TimeTakenInNs(time_taken);
+//		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "32 div time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_div_64();
-		  time_taken = TimeTakenInNs(time_taken);
+//		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "64 div time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_copy_8B();
 		  time_taken = TimeTakenInNs(time_taken);
-		  sprintf(MSG, "8B cp time = %d\n\r", time_taken);
+//		  sprintf(MSG, "8B cp time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_copy_128B();
-		  time_taken = TimeTakenInNs(time_taken);
+//		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "128B cp time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  time_taken = time_to_copy_1024B();
-		  time_taken = TimeTakenInNs(time_taken);
+//		  time_taken = TimeTakenInNs(time_taken);
 		  sprintf(MSG, "1024B cp time = %d\n\r", time_taken);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
@@ -222,51 +232,106 @@ int main(void)
 		  SendString("Clock control register which is used to set the clock flags\n\r");
 		  sprintf(MSG, "RCC->CR: %X\n\r", reg_val);
 		  SendString(MSG);
+		  memset(MSG, 0, sizeof(MSG));
 
 		  reg_val = RCC->CFGR;
 		  SendString("Clock configuration register which is used to set prescalers to adjust clock speeds\n\r");
 		  sprintf(MSG, "RCC->CFGR: %X\n\r", reg_val);
 		  SendString(MSG);
+		  memset(MSG, 0, sizeof(MSG));
 
 		  reg_val = RCC->CIR;
 		  SendString("Clock interrupt register which is used what types of clock interrupts are enabled\n\r");
 		  sprintf(MSG, "RCC->CIR: %X\n\r", reg_val);
 		  SendString(MSG);
+		  memset(MSG, 0, sizeof(MSG));
 
 		  reg_val = RCC->APB2RSTR;
 		  SendString("APB2 peripheral reset register which is used to set and reset clock timers\n\r");
 		  sprintf(MSG, "RCC->APB2RSTR: %X\n\r", reg_val);
 		  SendString(MSG);
+		  memset(MSG, 0, sizeof(MSG));
 
 		  reg_val = RCC->APB1RSTR;
 		  SendString("APB1 peripheral reset register which is used to reset communication connections and windowed watchdog and other timers\n\r");
 		  sprintf(MSG, "RCC->APB1RSTR: %X\n\r", reg_val);
 		  SendString(MSG);
+		  memset(MSG, 0, sizeof(MSG));
 
 		  reg_val = RCC->AHBENR;
 		  SendString("APB pheripheral clock enable register which  is used to enable pheripheral clocks\n\r");
 		  sprintf(MSG, "RCC->AHBENR: %X\n\r", reg_val);
 		  SendString(MSG);
+		  memset(MSG, 0, sizeof(MSG));
 
 		  reg_val = RCC->APB2ENR;
 		  SendString("APB2 pheripheral clock enable register which is used to enable pheripheral clocks including IO\n\r");
 		  sprintf(MSG, "RCC->APB2ENR %X\n\r", reg_val);
 		  SendString(MSG);
+		  memset(MSG, 0, sizeof(MSG));
 
 		  reg_val = RCC->APB1ENR;
 		  SendString("APB1 pheripheral clock enable register which is used to enable clocks to communication pheripherals\n\r");
 		  sprintf(MSG, "RCC->APB1ENR %X\n\r", reg_val);
 		  SendString(MSG);
+		  memset(MSG, 0, sizeof(MSG));
 
 		  reg_val = RCC->BDCR;
 		  SendString("Backup domain control register, used to enable main RTC and select clock source\n\r");
 		  sprintf(MSG, "RCC->BDCR %X\n\r", reg_val);
 		  SendString(MSG);
+		  memset(MSG, 0, sizeof(MSG));
 
 		  reg_val = RCC->CSR;
 		  SendString("Control status register, used to control reset requirements\n\r");
 		  sprintf(MSG, "RCC->CSR %X\n\r", reg_val);
 		  SendString(MSG);
+		  memset(MSG, 0, sizeof(MSG));
+	  }
+	  else if(inVal == 51)
+	  {
+		  time_taken = time_to_add_32();
+  		  time_taken = TimeTakenInNs(time_taken);
+		  sprintf(MSG, "32 add time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+//		  HAL_GPIO_WritePin(GPIOA, PA8_Pin, GPIO_PIN_SET);
+//		  HAL_GPIO_WritePin(GPIOA, LD2_Pin, GPIO_PIN_SET);
+//		  HAL_Delay(500);
+//		  HAL_GPIO_WritePin(GPIOA, PA8_Pin, GPIO_PIN_RESET);
+//		  HAL_GPIO_WritePin(GPIOA, LD2_Pin, GPIO_PIN_RESET);
+	  }
+	  else if (inVal == 52)
+	  {
+		  time_taken = time_to_add_64();
+		  time_taken = TimeTakenInNs(time_taken);
+		  sprintf(MSG, "64 add time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+	  }
+	  else if (inVal == 53)
+	  {
+		  time_taken = time_to_copy_8B();
+		  time_taken = TimeTakenInNs(time_taken);
+//		  sprintf(MSG, "8B cp time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+	  }
+	  else if (inVal == 54)
+	  {
+		  time_taken = time_to_copy_128B();
+		  time_taken = TimeTakenInNs(time_taken);
+		  sprintf(MSG, "128B cp time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+	  }
+	  else if (inVal == 55)
+	  {
+		  time_taken = time_to_copy_1024B();
+		  time_taken = TimeTakenInNs(time_taken);
+		  sprintf(MSG, "1024B cp time = %d\n\r", time_taken);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
 	  }
 
 	  SendString("Completed!\n\r");
@@ -402,7 +467,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LD2_Pin|PA8_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
@@ -411,11 +476,11 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LD2_Pin */
-  GPIO_InitStruct.Pin = LD2_Pin;
+  GPIO_InitStruct.Pin = LD2_Pin|PA8_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
