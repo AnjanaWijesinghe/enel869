@@ -30,6 +30,7 @@ Once started, the software will prompt to select whether sine or cosine is to be
 7. -0.5
 8. -0.8
 9. -1
+
 The Pin D7 will be set to high right before the calculation starts and then to low right after it ends.
 
 ## Issues and modifications
