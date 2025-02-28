@@ -139,32 +139,20 @@ int main(void)
 	  if(inVal == 49)
 	  {
 		  // x * 32767
+		  // sin(0) =================================================================
 		  SendString("Enter any to continue\n\r");
 		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
 		  outVal_s = custom_sin(0);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
 		  if(outVal_s >= 0)
 		  {
-			  sign = " ";
+			  sign = 43;
 		  }
 		  else
 		  {
-			  sign = "-";
-		  }
-		  outVal = (uint16_t)abs(outVal_s);
-		  sprintf(MSG, "Custom Sin 0 = %d / 32768\n\r", outVal);
-		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-		  memset(MSG, 0, sizeof(MSG));
-
-		  SendString("Enter any to continue\n\r");
-		  inVal = ReadChar();
-		  outVal_s = custom_sin(-0.3 * 32768);
-		  if(outVal_s >= 0)
-		  {
-			  sign = " ";
-		  }
-		  else
-		  {
-			  sign = "-";
+			  sign = 45;
+			  outVal_d *= -1;
 		  }
 		  outVal = (uint16_t)abs(outVal_s);
 		  sprintf(MSG, "Custom Sin 0 = %c %d / 32768\n\r", sign, outVal);
@@ -173,60 +161,688 @@ int main(void)
 
 		  SendString("Enter any to continue\n\r");
 		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
 		  outVal_d = regular_sin(0);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
 		  outVal = (uint16_t)(outVal_d * 32768);
-		  sprintf(MSG, "Regular Sin 0 = %d / 32768\n\r", outVal);
+		  sprintf(MSG, "Regular Sin 0 = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // sin(0.3pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_sin(0.3 * 32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Sin 0.3pi = %c %d / 32768\n\r", sign, outVal);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  SendString("Enter any to continue\n\r");
 		  inVal = ReadChar();
-		  outVal = (uint16_t)custom_sin(0.3 * 32768);
-		  sprintf(MSG, "Custom Sin 0.3 pi = %d / 32768\n\r", outVal);
-		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-		  memset(MSG, 0, sizeof(MSG));
-
-		  SendString("Enter any to continue\n\r");
-		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
 		  outVal_d = regular_sin(0.3 * M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
 		  outVal = (uint16_t)(outVal_d * 32768);
-		  sprintf(MSG, "Regular Sin 0.3 pi = %d / 32768\n\r", outVal);
+		  sprintf(MSG, "Regular Sin 0.3pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // sin(0.5pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_sin(0.5 * 32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Sin 0.5pi = %c %d / 32768\n\r", sign, outVal);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  SendString("Enter any to continue\n\r");
 		  inVal = ReadChar();
-		  outVal = (uint16_t)custom_sin(0.5 * 32768);
-		  sprintf(MSG, "Custom Sin 0.5 pi = %d / 32768\n\r", outVal);
-		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
-		  memset(MSG, 0, sizeof(MSG));
-
-		  SendString("Enter any to continue\n\r");
-		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
 		  outVal_d = regular_sin(0.5 * M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
 		  outVal = (uint16_t)(outVal_d * 32768);
-		  sprintf(MSG, "Regular Sin 0.5 pi = %d / 32768\n\r", outVal);
+		  sprintf(MSG, "Regular Sin 0.5pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // sin(0.8pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_sin(0.8 * 32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Sin 0.8pi = %c %d / 32768\n\r", sign, outVal);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  SendString("Enter any to continue\n\r");
 		  inVal = ReadChar();
-		  outVal = (uint16_t)custom_sin(32768);
-		  sprintf(MSG, "Custom Sin pi = %d / 32768\n\r", outVal);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_sin(0.8 * M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Sin 0.8pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // sin(pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_sin(32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Sin pi = %c %d / 32768\n\r", sign, outVal);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 
 		  SendString("Enter any to continue\n\r");
 		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
 		  outVal_d = regular_sin(M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
 		  outVal = (uint16_t)(outVal_d * 32768);
-		  sprintf(MSG, "Regular Sin pi = %d / 32768\n\r", outVal);
+		  sprintf(MSG, "Regular Sin pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // sin(-0.3pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_sin(-0.3 * 32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Sin -0.3pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_sin(-0.3 * M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Sin -0.3pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // sin(-0.5pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_sin(-0.5 * 32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Sin -0.5pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_sin(-0.5 * M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Sin -0.5pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // sin(-0.8pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_sin(-0.8 * 32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Sin -0.8pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_sin(-0.8 * M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Sin -0.8pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // sin(-pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_sin(-32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Sin -pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_sin(-M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Sin -pi = %c %d / 32768\n\r", sign, outVal);
 		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
 		  memset(MSG, 0, sizeof(MSG));
 	  }
 	  else if(inVal == 50)
 	  {
+		  // x * 32767
+		  // cos(0) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_cos(0);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Cos 0 = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
 
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_cos(0);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Cos 0 = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // cos(0.3pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_cos(0.3 * 32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Cos 0.3pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_cos(0.3 * M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Cos 0.3pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // cos(0.5pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_cos(0.5 * 32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Cos 0.5pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_cos(0.5 * M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Cos 0.5pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // cos(0.8pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_cos(0.8 * 32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Cos 0.8pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_cos(0.8 * M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Cos 0.8pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // cos(pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_cos(32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Cos pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_cos(M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Cos pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // cos(-0.3pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_cos(-0.3 * 32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Cos -0.3pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_cos(-0.3 * M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Cos -0.3pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // cos(-0.5pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_cos(-0.5 * 32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Cos -0.5pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_cos(-0.5 * M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Cos -0.5pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // cos(-0.8pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_cos(-0.8 * 32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Cos -0.8pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_cos(-0.8 * M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Cos -0.8pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  // cos(-pi) =================================================================
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_s = custom_cos(-32768);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_s >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)abs(outVal_s);
+		  sprintf(MSG, "Custom Cos -pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
+
+		  SendString("Enter any to continue\n\r");
+		  inVal = ReadChar();
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_SET);
+		  outVal_d = regular_cos(-M_PI);
+		  HAL_GPIO_WritePin(GPIOA, D7_Pin, GPIO_PIN_RESET);
+		  if(outVal_d >= 0)
+		  {
+			  sign = 43;
+		  }
+		  else
+		  {
+			  sign = 45;
+			  outVal_d *= -1;
+		  }
+		  outVal = (uint16_t)(outVal_d * 32768);
+		  sprintf(MSG, "Regular Cos -pi = %c %d / 32768\n\r", sign, outVal);
+		  HAL_UART_Transmit(&huart2, MSG, sizeof(MSG), 100);
+		  memset(MSG, 0, sizeof(MSG));
 	  }
 	  HAL_Delay(1000);
   }
