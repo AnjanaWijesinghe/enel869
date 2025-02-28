@@ -1,4 +1,4 @@
-### Lab 03
+# Lab 03
 
 The objective of this lab was to implement the integer Taylor series implemetation with 4 terms and compare it with the built-in sine and cosine implementation. The accuracy and speed of the algorithms were observed.
 
