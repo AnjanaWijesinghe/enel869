@@ -40,4 +40,4 @@ The output of the Taylor series implementation is directly output as a fraction 
 The output of the in-built functions are converted to pirad and then output.
 
 ## Other
-The documented information about the timings and accuracy is stored in Lab03.docx under the root directory.
+The documented information about the timings and accuracy is stored in Lab03.docx under the lab02 directory.
