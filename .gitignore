@@ -50,3 +50,7 @@ release
 *.su
 *.idb
 *.pdb
+
+# Keil project
+Project/Listings
+Project/Objects
