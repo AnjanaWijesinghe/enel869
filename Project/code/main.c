@@ -1,83 +1,88 @@
 #include <stdio.h>
+
 #include "stm32f10x.h"
+
 #include "timer/time.h"
+#include "drivers/gpio.h"
+#include "drivers/clock.h"
+#include "servo/servo.h"
+#include "led/led.h"
+#include "cli/cli.h"
+#include "ir/ir.h"
 
 
-void gpio_ports_enable(void)
+int adc_val = 0;
+
+
+void ADC1_2_IRQHandler() 
 {
-  RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_IOPBEN | RCC_APB2ENR_IOPCEN; //ports A & B & C clock enabled
-	GPIOB->CRH = 0x44444443; // pin PB8 output mode at highest speed
+	adc_val = ADC1->DR;
+	//while( !( USART2->SR & USART_SR_TXE ) ) {};
+	//USART2->DR = adc_val;
+	
+	// clear interrupt flag
+	ADC1->SR &= ~(1<<1);
+	
+	//ADC1->CR2 |= ADC_CR2_SWSTART;
 }
+
+
 
 int main(void)
 {
-	/*
-  gpio_ports_enable();
-	enable_timer();
-	for(;;)  //main loop - read "forever", or you may use 'while(1)'
-	{
-		GPIOB->BSRR = GPIO_BSRR_BS8; 
-		//TDelay_Micros(10000);
-		TDelay_Millis(1000);
-		GPIOB->BSRR = GPIO_BSRR_BR8; 
-		//TDelay_Micros(10000);
-		TDelay_Millis(1000);
-	}
-	*/
-	RCC->APB1ENR |= RCC_APB1ENR_TIM4EN;  // enable TIM4
-	TIM4->PSC = 1;  // setting prescaler to 1
-	TIM4->ARR = 35999;  // set auto-reload after 36,000 clks
+	// enable timer 1 with 72 prescaler
+	enable_timer(1, 72, 0);
+	// enable timer 4 with 36 prescaler
+	//enable_timer(4, 36, 40000);
+	enable_timer(4, 7199, 9999);
 	
-	TIM4->PSC = 36-1;  // setting prescaler to 2
-	TIM4->ARR = 40000;  // setting ARR to 57600 clks
-	// This should give a pulse of length 1600 us
+	//setup_servo_timer(1800);
+	setup_led_timer(0, 50, 5000);
 	
-	TIM4->CR1 = 0;     // reset command register 1
-  TIM4->CR2 = 0;     // reset command register 2
-
-	//TIM4->PSC = 7199; 
-	//TIM4->ARR = 9999;  // set auto-reload after 10,000 clks
-			
-	TIM4->CCR1  = 0;       // 0
-	//TIM4->CCR2  = 5000;
-	TIM4->CCR2  = 20000;       // setting to half the width of ARR
-	TIM4->CCR2 = 1200;  // setting to 600us = low point?
-	TIM4->CCR3  = 5000;    //
-	TIM4->CCR4  = 2500;    //
-	TIM4->CCMR1 = 0x6000;       // 0
-	TIM4->CCMR2 = 0x6060;  // 0x6060
-	TIM4->CCER  = 0x1110;  // 0x1100 set capture/compare enable register
-	TIM4->SMCR  = 0;       // 0 set slave mode control register
-			
-	TIM4->CR1 = 1u<<2;    // 1: URS: Only counter overflow/underflow
-		 // generates an update interrupt or DMA
-		 // request if enabled.
-
-	TIM4->CR2 = 0;        // 0x0 set command register 2
-
-	TIM4->CR1 |= 1u<<0;   // 0: enable timer
+	enable_gpiob();
+	// enable servo
+	enable_gpiob_pin(7, 3, 2);
+	// enable led pa9
+	enable_gpiob_pin(9, 3, 2);
+	// enable led pa8
+	enable_gpiob_pin(8, 3, 2);
 	
-	RCC->APB2ENR |= 1u<<3;	// bit 3: IOPBEN=1, enable GPIOB clock
-	GPIOB->CRL = 
-				// configure PB7 as TIM4_CH2 output
-				(0xBu<<28);
-	GPIOB->CRH = 
-        // configure PB9 as TIM4_CH4 output
-        (0xBu<<4) | // bits 7:4,  PB9,  output mode, 10MHz, alt func open drain
-        // configure PB8 as TIM4_CH3 output
-        (0xBu<<0);  // bits 3:0,  PB8,  output mode, 10MHz, alt func open drain
-				
+	enable_gpioc();
+	// enable ir
+	enable_gpioc_pin(0, 0, 1);
+	enable_ir();
 	
-	// PB8 TIM4 CH3
-	// PB9 TIM4 CH4
-	// PB7 TIM4 CH2
-	// Servo at either 1500 to 1900usec or 900-2100 µs
-	// Therefore will run at 1600 us
-	enable_timer();
+	enable_usart2();
+	start_ir_adc();
+	char rxb = 'a';
+	rxb = 'a';
 	while (1) 
 	{
+		rxb = adc_val;
+		while( !( USART2->SR & USART_SR_RXNE ) ) {};
+    rxb = USART2->DR;
+		
+		//rxb = 'a';
+		//while( !( USART2->SR & USART_SR_TXE ) ) {};
+		//USART2->DR = rxb;
+		
+		/*while( !( USART2->SR & USART_SR_RXNE ) ) 
+		{
+		}
+		rxb = USART2->DR;
+		while( !( USART2->SR & USART_SR_TXE ) )
+		{
+		}
+		USART2->DR = rxb;*/
+		/*rxb = 'a';
+		USART2->DR = rxb;
+		while( !( USART2->SR & USART_SR_TXE ) )
+		{
+		}
+		USART2->DR = rxb;
+		rxb = 'a';*/
 		// change CCR1 to change the duty cycle and observe how the servo changes
-		TIM4->CCR2 = 1800; //2500;  // setting to 1200us = low point?
+		/*TIM4->CCR2 = 1800; //2500;  // setting to 1200us = low point?
 		TDelay_Millis(5000);
 		TIM4->CCR2 = 2300; //3000;  // setting to 1200us = med point?
 		TDelay_Millis(5000);
@@ -90,6 +95,6 @@ int main(void)
 		TIM4->CCR2 = 2300; //3000;  // setting to 1200us = med point?
 		TDelay_Millis(5000);
 		TIM4->CCR2 = 2200; //3000;  // setting to 1200us = med point?
-		TDelay_Millis(5000);
+		TDelay_Millis(5000);*/
 	}   
 }

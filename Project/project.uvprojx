@@ -391,11 +391,6 @@
               <FilePath>.\code\drivers\gpio.c</FilePath>
             </File>
             <File>
-              <FileName>clock.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\code\drivers\clock.c</FilePath>
-            </File>
-            <File>
               <FileName>time.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\code\timer\time.c</FilePath>
@@ -404,6 +399,31 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\code\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>clock.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\drivers\clock.c</FilePath>
+            </File>
+            <File>
+              <FileName>servo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\servo\servo.c</FilePath>
+            </File>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\led\led.c</FilePath>
+            </File>
+            <File>
+              <FileName>cli.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\cli\cli.c</FilePath>
+            </File>
+            <File>
+              <FileName>ir.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\ir\ir.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -429,6 +449,26 @@
               <FileName>clock.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\code\drivers\clock.h</FilePath>
+            </File>
+            <File>
+              <FileName>servo.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\servo\servo.h</FilePath>
+            </File>
+            <File>
+              <FileName>led.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\led\led.h</FilePath>
+            </File>
+            <File>
+              <FileName>cli.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\cli\cli.h</FilePath>
+            </File>
+            <File>
+              <FileName>ir.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\ir\ir.h</FilePath>
             </File>
           </Files>
         </Group>

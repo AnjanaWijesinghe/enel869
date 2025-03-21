@@ -1,0 +1,1 @@
+void setup_servo_timer(int ccr2);
