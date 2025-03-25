@@ -54,47 +54,76 @@ int main(void)
 	
 	enable_usart2();
 	start_ir_adc();
-	char rxb = 'a';
-	rxb = 'a';
+	
+	// setting default servo values
+	int servo_max = 2600;
+	int servo_min = 1800;
+	int servo_val = 2200;
+	
+	char rxb;
+	char version[] = "|| version = 0.0.2 ||";
+	char read_str[100] = {0};
+	
+	// set servo
+	set_servo_val(servo_val, servo_max, servo_min);
+	
 	while (1) 
 	{
-		rxb = adc_val;
-		while( !( USART2->SR & USART_SR_RXNE ) ) {};
-    rxb = USART2->DR;
+		print_header(version);
+		print_values(servo_val, servo_max, servo_min, adc_val);
+
+		// read the highest level options
+		rxb = read_ch_usart2();
+		switch(rxb)
+		{
+			case 114:
+				write_str_usart2("refresh");
+				// r entered
+				// refresh window
+				break;
+			case 105:
+				write_str_usart2("increase 1");
+				// i entered
+				// increase servo by 1
+				servo_val = increase_servo_val(1, servo_val, servo_max, servo_min);
+				break;
+			case 73:
+				write_str_usart2("increase 10");
+				// I entered
+				// increase servo by 10
+				servo_val = increase_servo_val(10, servo_val, servo_max, servo_min);
+				break;
+			case 100:
+				write_str_usart2("decrease 1");
+				// d entered
+				// decrease servo by 1
+				servo_val = decrease_servo_val(1, servo_val, servo_max, servo_min);
+				break;
+			case 68:
+				write_str_usart2("decrease 10");
+				// D entered
+				// decrease servo by 10
+				servo_val = decrease_servo_val(10, servo_val, servo_max, servo_min);
+				break;
+			case 104:
+				write_str_usart2("Set servo high bound: ");
+				// h entered
+				// set servo high point
+				servo_max = read_int(read_str);
+				break;
+			case 108:
+				write_str_usart2("Set servo low bound: ");
+				// l entered
+				// set servo low point
+				servo_min = read_int(read_str);
+				break;
+			case 115:
+				write_str_usart2("Set servo value: ");
+				// s entered
+				// set servo value
+				servo_val = custom_servo_val(read_int(read_str), servo_val, servo_max, servo_min);
+				break;
+		}
 		
-		//rxb = 'a';
-		//while( !( USART2->SR & USART_SR_TXE ) ) {};
-		//USART2->DR = rxb;
-		
-		/*while( !( USART2->SR & USART_SR_RXNE ) ) 
-		{
-		}
-		rxb = USART2->DR;
-		while( !( USART2->SR & USART_SR_TXE ) )
-		{
-		}
-		USART2->DR = rxb;*/
-		/*rxb = 'a';
-		USART2->DR = rxb;
-		while( !( USART2->SR & USART_SR_TXE ) )
-		{
-		}
-		USART2->DR = rxb;
-		rxb = 'a';*/
-		// change CCR1 to change the duty cycle and observe how the servo changes
-		/*TIM4->CCR2 = 1800; //2500;  // setting to 1200us = low point?
-		TDelay_Millis(5000);
-		TIM4->CCR2 = 2300; //3000;  // setting to 1200us = med point?
-		TDelay_Millis(5000);
-		TIM4->CCR2 = 2600; //3300;  // setting to 1200us = high point?
-		TDelay_Millis(5000);
-		TIM4->CCR2 = 2500; //3200;  // setting to 1200us = med point?
-		TDelay_Millis(5000);
-		TIM4->CCR2 = 2450; //3150;  // setting to 1200us = med point?
-		TDelay_Millis(5000);
-		TIM4->CCR2 = 2300; //3000;  // setting to 1200us = med point?
-		TDelay_Millis(5000);
-		TIM4->CCR2 = 2200; //3000;  // setting to 1200us = med point?
-		TDelay_Millis(5000);*/
 	}   
 }

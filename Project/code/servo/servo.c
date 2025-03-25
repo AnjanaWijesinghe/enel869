@@ -28,3 +28,46 @@ void setup_servo_timer(int ccr2)
 
 	TIM4->CR1 |= 1u<<0;   // 0: enable timer
 }
+
+int set_servo_val(int val, int max_val, int min_val)
+{
+	// set the servo to the new value if it is within the given range
+	if(val >= min_val && val <= max_val)
+	{
+		TIM4->CCR2 = val;
+		return 1;
+	}
+	return 0;
+}
+
+int custom_servo_val(int new_val, int curr_val, int max_val, int min_val)
+{
+	// set servo to custom value within bounds
+	if(set_servo_val(new_val, max_val, min_val) == 1)
+	{
+		return new_val;
+	}
+	return curr_val;
+}
+
+int increase_servo_val(int inc_val, int curr_val, int max_val, int min_val)
+{
+	// increase the value of the servo by the given amount
+	int new_val = curr_val + inc_val;
+	if (set_servo_val(new_val, max_val, min_val) == 1)
+	{
+		return new_val;
+	}
+	return curr_val;
+}
+
+int decrease_servo_val(int dec_val, int curr_val, int max_val, int min_val)
+{
+	// increase the value of the servo by the given amount
+	int new_val = curr_val - dec_val;
+	if (set_servo_val(new_val, max_val, min_val) == 1)
+	{
+		return new_val;
+	}
+	return curr_val;
+}
