@@ -1,0 +1,1 @@
+void enable_timer(int timer, int psc, int arr);
