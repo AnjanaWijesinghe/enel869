@@ -4,6 +4,8 @@ void enable_ir()
 {
 	// enabling ADC1 clock
 	RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;
+	// setting sqr3
+	ADC1->SQR3 = 0b11111;
 	// setting channel 10 to 55.5 cycles
 	ADC1->SMPR1 |= 5u<<0; // 101 at bit 0
 	// enable scan mode

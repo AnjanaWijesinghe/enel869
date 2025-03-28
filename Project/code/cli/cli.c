@@ -175,10 +175,10 @@ void print_header(char version[])
 	write_str_usart2("s - set servo value");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
-	write_str_usart2("h - set servo high point");
+	write_str_usart2("h - set servo high limit");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
-	write_str_usart2("l - set servo low point");
+	write_str_usart2("l - set servo low limit");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
 }
@@ -210,6 +210,16 @@ void print_values(int curr_servo, int max_servo, int min_servo, int curr_ir)
 	write_str_usart2("Servo val: ");
 	write_str_usart2(curr_servo_str);
 	write_str_usart2(" | IR val: ");
+	write_str_usart2(curr_ir_str);
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+}
+
+void print_ir_only(int curr_ir)
+{
+	char curr_ir_str[5];
+	sprintf(curr_ir_str,"%d",curr_ir);
+	
 	write_str_usart2(curr_ir_str);
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');

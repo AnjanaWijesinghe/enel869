@@ -6,7 +6,10 @@ void enable_gpiob(void)
 	RCC->APB2ENR |= 1u<<3;	// bit 3: IOPBEN=1, enable GPIOB clock
   //RCC->APB2ENR |= RCC_APB2ENR_IOPAEN | RCC_APB2ENR_IOPBEN | RCC_APB2ENR_IOPCEN; //ports A & B & C clock enabled
 	//GPIOB->CRH = 0x44444443; // pin PB8 output mode at highest speed
-	
+	// reset crl
+	GPIOB->CRL = 0;
+	// reset crh
+	GPIOB->CRL = 0;
 }
 
 	/*

@@ -12,6 +12,7 @@
 
 
 int adc_val = 0;
+int read_adc = 0;
 
 
 void ADC1_2_IRQHandler() 
@@ -23,7 +24,7 @@ void ADC1_2_IRQHandler()
 	// clear interrupt flag
 	ADC1->SR &= ~(1<<1);
 	
-	//ADC1->CR2 |= ADC_CR2_SWSTART;
+	ADC1->CR2 |= ADC_CR2_SWSTART;
 }
 
 
@@ -33,15 +34,23 @@ int main(void)
 	// enable timer 1 with 72 prescaler
 	enable_timer(1, 72, 0);
 	// enable timer 4 with 36 prescaler
-	//enable_timer(4, 36, 40000);
-	enable_timer(4, 7199, 9999);
+	enable_timer(4, 36, 40000);
+	//enable_timer(4, 7199, 9999);
 	
 	//setup_servo_timer(1800);
 	setup_led_timer(0, 50, 5000);
 	
+	// setting default servo values
+	int servo_max = 2600;
+	int servo_min = 1900;
+	int servo_val = 2300;
+	
 	enable_gpiob();
 	// enable servo
 	enable_gpiob_pin(7, 3, 2);
+	// set servo
+	set_servo_val(servo_val, servo_max, servo_min);
+	
 	// enable led pa9
 	enable_gpiob_pin(9, 3, 2);
 	// enable led pa8
@@ -55,29 +64,37 @@ int main(void)
 	enable_usart2();
 	start_ir_adc();
 	
-	// setting default servo values
-	int servo_max = 2600;
-	int servo_min = 1800;
-	int servo_val = 2200;
-	
 	char rxb;
 	char version[] = "|| version = 0.0.2 ||";
 	char read_str[100] = {0};
-	
-	// set servo
-	set_servo_val(servo_val, servo_max, servo_min);
 	
 	while (1) 
 	{
 		print_header(version);
 		print_values(servo_val, servo_max, servo_min, adc_val);
-
+		
+		//print_ir_only(adc_val);
 		// read the highest level options
+		/*
+		// Debug the ball height to measure the IR value
+		write_str_usart2("Height in cm: ");
+		read_int(read_str);
+		write_ch_usart2('\n');
+		write_ch_usart2('\r');
+		for (int counter=0; counter < 50; counter++)
+		{
+			print_ir_only(adc_val);
+			TDelay_Millis(50);
+			TDelay_Micros(67);
+		}
+		write_ch_usart2('\n');
+		write_ch_usart2('\r');
+		*/
 		rxb = read_ch_usart2();
 		switch(rxb)
 		{
 			case 114:
-				write_str_usart2("refresh");
+				//write_str_usart2("refresh");
 				// r entered
 				// refresh window
 				break;
@@ -123,6 +140,11 @@ int main(void)
 				// set servo value
 				servo_val = custom_servo_val(read_int(read_str), servo_val, servo_max, servo_min);
 				break;
+			//case 97:
+				// read adc value
+				//ADC1->CR2 |= ADC_CR2_SWSTART;
+				//adc_val = ADC1->DR;
+				//break;
 		}
 		
 	}   

@@ -7,3 +7,4 @@ void print_header(char version[]);
 void write_string(char write_str[]);
 int read_int(char read_str[]);
 void print_values(int curr_servo, int max_servo, int min_servo, int curr_ir);
+void print_ir_only(int curr_ir);
