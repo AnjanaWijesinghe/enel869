@@ -425,6 +425,11 @@
               <FileType>1</FileType>
               <FilePath>.\code\ir\ir.c</FilePath>
             </File>
+            <File>
+              <FileName>test_ir_values.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\ir\test_ir_values.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

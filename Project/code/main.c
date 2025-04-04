@@ -13,6 +13,12 @@
 
 int adc_val = 0;
 int read_adc = 0;
+char global_rxb;
+
+// 0 is control ball mode
+// 1 is limbo mode
+// 2 is debug mode
+int machine_state = 0;
 
 
 void ADC1_2_IRQHandler() 
@@ -27,6 +33,16 @@ void ADC1_2_IRQHandler()
 	ADC1->CR2 |= ADC_CR2_SWSTART;
 }
 
+void USART2_IRQHandler() 
+{
+	// change machine state
+	machine_state = 1;
+	
+	global_rxb = USART2->DR;
+	
+	// clear interrupt
+	USART2->SR &= ~(1<<5);
+}
 
 
 int main(void)
@@ -66,86 +82,143 @@ int main(void)
 	
 	char rxb;
 	char version[] = "|| version = 0.0.2 ||";
-	char read_str[100] = {0};
+	//char read_str[100] = {0};
 	
 	while (1) 
 	{
-		print_header(version);
 		print_values(servo_val, servo_max, servo_min, adc_val);
 		
-		//print_ir_only(adc_val);
-		// read the highest level options
-		/*
-		// Debug the ball height to measure the IR value
-		write_str_usart2("Height in cm: ");
-		read_int(read_str);
-		write_ch_usart2('\n');
-		write_ch_usart2('\r');
-		for (int counter=0; counter < 50; counter++)
+		if(machine_state == 0)
 		{
-			print_ir_only(adc_val);
-			TDelay_Millis(50);
-			TDelay_Micros(67);
+			// PID mode
 		}
-		write_ch_usart2('\n');
-		write_ch_usart2('\r');
-		*/
-		rxb = read_ch_usart2();
-		switch(rxb)
+		else if (machine_state == 1)
 		{
-			case 114:
-				//write_str_usart2("refresh");
-				// r entered
-				// refresh window
-				break;
-			case 105:
-				write_str_usart2("increase 1");
-				// i entered
-				// increase servo by 1
-				servo_val = increase_servo_val(1, servo_val, servo_max, servo_min);
-				break;
-			case 73:
-				write_str_usart2("increase 10");
-				// I entered
-				// increase servo by 10
-				servo_val = increase_servo_val(10, servo_val, servo_max, servo_min);
-				break;
-			case 100:
-				write_str_usart2("decrease 1");
-				// d entered
-				// decrease servo by 1
-				servo_val = decrease_servo_val(1, servo_val, servo_max, servo_min);
-				break;
-			case 68:
-				write_str_usart2("decrease 10");
-				// D entered
-				// decrease servo by 10
-				servo_val = decrease_servo_val(10, servo_val, servo_max, servo_min);
-				break;
-			case 104:
-				write_str_usart2("Set servo high bound: ");
-				// h entered
-				// set servo high point
-				servo_max = read_int(read_str);
-				break;
-			case 108:
-				write_str_usart2("Set servo low bound: ");
-				// l entered
-				// set servo low point
-				servo_min = read_int(read_str);
-				break;
-			case 115:
-				write_str_usart2("Set servo value: ");
-				// s entered
-				// set servo value
-				servo_val = custom_servo_val(read_int(read_str), servo_val, servo_max, servo_min);
-				break;
-			//case 97:
-				// read adc value
-				//ADC1->CR2 |= ADC_CR2_SWSTART;
-				//adc_val = ADC1->DR;
-				//break;
+			// limbo mode
+			disable_rx_interrupt();
+			
+			switch(global_rxb)
+			{
+				case 114:
+					//write_str_usart2("refresh");
+					// r entered
+					// refresh window
+					break;
+				case 105:
+					write_str_usart2("increase 1");
+					// i entered
+					// increase servo by 1
+					servo_val = increase_servo_val(1, servo_val, servo_max, servo_min);
+					break;
+				case 73:
+					write_str_usart2("increase 10");
+					// I entered
+					// increase servo by 10
+					servo_val = increase_servo_val(10, servo_val, servo_max, servo_min);
+					break;
+				case 100:
+					write_str_usart2("decrease 1");
+					// d entered
+					// decrease servo by 1
+					servo_val = decrease_servo_val(1, servo_val, servo_max, servo_min);
+					break;
+				case 68:
+					write_str_usart2("decrease 10");
+					// D entered
+					// decrease servo by 10
+					servo_val = decrease_servo_val(10, servo_val, servo_max, servo_min);
+					break;
+				
+				case 104:
+					write_str_usart2("Set servo high bound: ");
+					// h entered
+					// set servo high point
+					servo_max = read_int(servo_max);
+					break;
+				case 108:
+					write_str_usart2("Set servo low bound: ");
+					// l entered
+					// set servo low point
+					servo_min = read_int(servo_min);
+					break;
+				case 115:
+					write_str_usart2("Set servo value: ");
+					// s entered
+					// set servo value
+					servo_val = custom_servo_val(read_int(servo_val), servo_val, servo_max, servo_min);
+					break;
+			}
 		}
-		
+		else
+		{
+			// disable rx interrupts
+			disable_rx_interrupt();
+			// used to get into debug mode
+			//read_ch_usart2();
+			print_header(version);
+			
+			// read input
+			rxb = read_ch_usart2();
+			switch(rxb)
+			{
+				case 114:
+					//write_str_usart2("refresh");
+					// r entered
+					// refresh window
+					break;
+				case 105:
+					write_str_usart2("increase 1");
+					// i entered
+					// increase servo by 1
+					servo_val = increase_servo_val(1, servo_val, servo_max, servo_min);
+					break;
+				case 73:
+					write_str_usart2("increase 10");
+					// I entered
+					// increase servo by 10
+					servo_val = increase_servo_val(10, servo_val, servo_max, servo_min);
+					break;
+				case 100:
+					write_str_usart2("decrease 1");
+					// d entered
+					// decrease servo by 1
+					servo_val = decrease_servo_val(1, servo_val, servo_max, servo_min);
+					break;
+				case 68:
+					write_str_usart2("decrease 10");
+					// D entered
+					// decrease servo by 10
+					servo_val = decrease_servo_val(10, servo_val, servo_max, servo_min);
+					break;
+				case 104:
+					write_str_usart2("Set servo high bound: ");
+					// h entered
+					// set servo high point
+					servo_max = read_int(servo_max);
+					break;
+				case 108:
+					write_str_usart2("Set servo low bound: ");
+					// l entered
+					// set servo low point
+					servo_min = read_int(servo_min);
+					break;
+				case 115:
+					write_str_usart2("Set servo value: ");
+					// s entered
+					// set servo value
+					servo_val = custom_servo_val(read_int(servo_val), servo_val, servo_max, servo_min);
+					break;
+				//case 97:
+					// read adc value
+					//ADC1->CR2 |= ADC_CR2_SWSTART;
+					//adc_val = ADC1->DR;
+					//break;
+			}
+			// set the machine back into normal state
+			machine_state = 0;
+			
+			// enable rx interrupts
+			enable_rx_interrupt();
+		}
 	}   
 }

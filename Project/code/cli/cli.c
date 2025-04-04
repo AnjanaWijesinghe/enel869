@@ -2,7 +2,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
-
+#include "cli.h"
 
 /*char* itoa(int val, int base){
 	
@@ -57,8 +57,9 @@ void enable_usart2()
 	// Mantissa = 13
 	// Fraction = 9
 	
-	
 	USART2->BRR = 0x138;
+	
+	enable_rx_interrupt();
 	
 	// enable tx and rx on cr1
 	USART2->CR1 |= 1u<<2;
@@ -66,6 +67,21 @@ void enable_usart2()
 	
 	// enable usart2
 	USART2->CR1 |= 1u<<13;
+	
+	// enable interrupt in nvic
+	NVIC->ISER[1] |= NVIC_ISER_SETENA_6;
+}
+
+void enable_rx_interrupt()
+{
+	// enable interrupt RXNEIE
+	USART2->CR1 |= 1u<<5;
+}
+
+void disable_rx_interrupt()
+{
+	// disable interrupt RXNEIE
+	USART2->CR1 &= ~(1<<5);
 }
 
 void write_ch_usart2(int ch)
@@ -200,18 +216,19 @@ void print_values(int curr_servo, int max_servo, int min_servo, int curr_ir)
 	sprintf(min_servo_str,"%d",min_servo);
 	sprintf(curr_ir_str,"%d",curr_ir);
 	
-	write_ch_usart2('\n');
+	//write_ch_usart2('\n');
 	write_str_usart2("Servo Max: ");
 	write_str_usart2(max_servo_str);
 	write_str_usart2(" | Servo Min: ");
 	write_str_usart2(min_servo_str);
-	write_ch_usart2('\n');
-	write_ch_usart2('\r');
-	write_str_usart2("Servo val: ");
+	//write_ch_usart2('\n');
+	//write_ch_usart2('\r');
+	write_str_usart2(" | Servo val: ");
 	write_str_usart2(curr_servo_str);
 	write_str_usart2(" | IR val: ");
 	write_str_usart2(curr_ir_str);
-	write_ch_usart2('\n');
+	write_str_usart2("                    ");
+	//write_ch_usart2('\n');
 	write_ch_usart2('\r');
 }
 
