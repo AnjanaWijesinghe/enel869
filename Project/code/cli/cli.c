@@ -157,7 +157,7 @@ int read_int(int curr_val)
 	return num;
 }
 
-void print_header(char version[])
+void print_debug_header(char version[])
 {
 	// print out the version
 	write_ch_usart2('\n');
@@ -173,7 +173,7 @@ void print_header(char version[])
 	write_str_usart2("Usage:");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
-	write_str_usart2("r - refresh");
+	write_str_usart2("r - exit");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
 	write_str_usart2("i - increase servo by 1");
@@ -197,24 +197,76 @@ void print_header(char version[])
 	write_str_usart2("l - set servo low limit");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
+	write_str_usart2("a - set height value in IR");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+	write_str_usart2("#1 - set Kp");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+	write_str_usart2("#2 - set Ki");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+	write_str_usart2("#3 - set Kd");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
 }
 
-void print_values(int curr_servo, int max_servo, int min_servo, int curr_ir)
+void print_main_header(char version[])
+{
+	// print out the version
+	write_ch_usart2('\n');
+	write_ch_usart2('\n');
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+	write_str_usart2("||----||");
+	write_str_usart2(version);
+	write_str_usart2("||----||");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+	
+	write_str_usart2("Usage:");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+	write_str_usart2("i - increase servo by 1");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+	write_str_usart2("I - increase servo by 10");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+	write_str_usart2("d - decrease servo by 1");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+	write_str_usart2("D - decrease servo by 10");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+	write_str_usart2("q - enter debug mode");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+}
+
+void print_values(int curr_servo, int max_servo, int min_servo, int curr_ir, int req_ir, int kp, int ki, int kd, int pid)
 {
 	// print the running values
-	//int load = 15;
-	//char buffer[100];
 
-	//sprintf(buffer,"%d",load);
 	char curr_servo_str[5];
 	char max_servo_str[5];
 	char min_servo_str[5];
 	char curr_ir_str[5];
+	char req_ir_str[5];
+	char kp_str[5];
+	char ki_str[5];
+	char kd_str[5];
+	char pid_str[5];
 	
 	sprintf(curr_servo_str,"%d",curr_servo);
 	sprintf(max_servo_str,"%d",max_servo);
 	sprintf(min_servo_str,"%d",min_servo);
 	sprintf(curr_ir_str,"%d",curr_ir);
+	sprintf(req_ir_str,"%d",req_ir);
+	sprintf(kp_str,"%d",kp);
+	sprintf(ki_str,"%d",ki);
+	sprintf(kd_str,"%d",kd);
+	sprintf(pid_str,"%d",pid);
 	
 	//write_ch_usart2('\n');
 	write_str_usart2("Servo Max: ");
@@ -227,6 +279,16 @@ void print_values(int curr_servo, int max_servo, int min_servo, int curr_ir)
 	write_str_usart2(curr_servo_str);
 	write_str_usart2(" | IR val: ");
 	write_str_usart2(curr_ir_str);
+	write_str_usart2(" | Req IR val: ");
+	write_str_usart2(req_ir_str);
+	write_str_usart2(" | Kp: ");
+	write_str_usart2(kp_str);
+	write_str_usart2(" | Ki: ");
+	write_str_usart2(ki_str);
+	write_str_usart2(" | Kd: ");
+	write_str_usart2(kd_str);
+	write_str_usart2(" | PID: ");
+	write_str_usart2(pid_str);
 	write_str_usart2("                    ");
 	//write_ch_usart2('\n');
 	write_ch_usart2('\r');

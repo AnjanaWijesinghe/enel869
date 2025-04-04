@@ -430,6 +430,21 @@
               <FileType>1</FileType>
               <FilePath>.\code\ir\test_ir_values.c</FilePath>
             </File>
+            <File>
+              <FileName>pid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\pid\pid.c</FilePath>
+            </File>
+            <File>
+              <FileName>moving_average_filter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\pid\moving_average_filter.c</FilePath>
+            </File>
+            <File>
+              <FileName>moving_average_filter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\pid\moving_average_filter.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -474,6 +489,11 @@
               <FileName>ir.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\code\ir\ir.h</FilePath>
+            </File>
+            <File>
+              <FileName>pid.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\pid\pid.h</FilePath>
             </File>
           </Files>
         </Group>
