@@ -29,7 +29,7 @@ int machine_state = 1;
 // setting default servo values
 int servo_max = 2600;
 int servo_min = 1900;
-int servo_val = 2300;
+int servo_val = 2000;
 
 // required height in IR value
 int required_height = 2600;
@@ -119,19 +119,19 @@ void debug_menu()
 			write_str_usart2("Set Kp value: ");
 			// s entered
 			// set servo value
-			pid.Kp = read_int();
+			pid.Kp = read_float();
 			break;
 		case 50:
 			write_str_usart2("Set Ki value: ");
 			// s entered
 			// set servo value
-			pid.Ki = read_int();
+			pid.Ki = read_float();
 			break;
 		case 51:
 			write_str_usart2("Set Kd value: ");
 			// s entered
 			// set servo value
-			pid.Kd = read_int();
+			pid.Kd = read_float();
 			break;
 		case 97:
 			write_str_usart2("Set height value in IR: ");
@@ -218,27 +218,6 @@ int main(void)
 		if(machine_state == 0)
 		{
 			// PID mode
-			//PID_Calculation(&pid, adc_val - required_height, 1000);
-			//PID_Calculation_b(&pid, adc_val - required_height, 10);
-			//PID_map(&pid, servo_val, 20, -20);
-			//servo_val = custom_servo_val(pid.output_mapped, servo_val, servo_max, servo_min);
-			//servo_val = simple_step_calculation(servo_val, adc_val - required_height, 10);
-/*			servo_val = custom_servo_val(
-				simple_step_calculation(servo_val, adc_val - required_height, 10), 
-				servo_val, 
-				servo_max, 
-				servo_min
-			);*/
-			/*
-			if (input_error >= 10)
-			{
-				servo_val = increase_servo_val(5, servo_val, servo_max, servo_min);
-			}
-			else if (input_error <= -10)
-			{
-				servo_val = decrease_servo_val(5, servo_val, servo_max, servo_min);
-			}
-			*/
 			// calculating PID
 			PID_Calculation_c(&pid, input_error, sampling_rate);
 			// limiting the pid to the given range
@@ -294,100 +273,6 @@ int main(void)
 			}
 			// enable rx interrupts
 			enable_rx_interrupt();
-			/*
-			int exit_manual_mode = 0;
-			while (1)
-			{
-				print_values(machine_state, servo_val, servo_max, servo_min, adc_val, required_height, pid.Kp, pid.Ki, pid.Kd, pid.output, input_error);
-				char rxb;
-				// read input
-				rxb = read_ch_usart2();
-				switch(rxb)
-				{
-					case 114:
-						//write_str_usart2("refresh");
-						// r entered
-						// refresh window
-						break;
-					case 105:
-						// i entered
-						// increase servo by 1
-						servo_val = increase_servo_val(1, servo_val, servo_max, servo_min);
-						break;
-					case 73:
-						// I entered
-						// increase servo by 10
-						servo_val = increase_servo_val(10, servo_val, servo_max, servo_min);
-						break;
-					case 100:
-						// d entered
-						// decrease servo by 1
-						servo_val = decrease_servo_val(1, servo_val, servo_max, servo_min);
-						break;
-					case 68:
-						// D entered
-						// decrease servo by 10
-						servo_val = decrease_servo_val(10, servo_val, servo_max, servo_min);
-						break;
-					case 113:
-						// q to enter debug mode
-						debug_menu();
-						break;
-					case 101:
-						// e to change to pid mode
-						machine_state = 0;				
-						// reset PID
-						reset_pid(&pid);
-						exit_manual_mode = 1;
-						break;	
-				}
-				if (exit_manual_mode == 1)
-				{
-					break;
-				}
-			}
-			*/
-			/*switch(global_rxb)
-			{
-				case 114:
-					//write_str_usart2("refresh");
-					// r entered
-					// refresh window
-					break;
-				case 105:
-					// i entered
-					// increase servo by 1
-					servo_val = increase_servo_val(1, servo_val, servo_max, servo_min);
-					break;
-				case 73:
-					// I entered
-					// increase servo by 10
-					servo_val = increase_servo_val(10, servo_val, servo_max, servo_min);
-					break;
-				case 100:
-					// d entered
-					// decrease servo by 1
-					servo_val = decrease_servo_val(1, servo_val, servo_max, servo_min);
-					break;
-				case 68:
-					// D entered
-					// decrease servo by 10
-					servo_val = decrease_servo_val(10, servo_val, servo_max, servo_min);
-					break;
-				case 113:
-					// q to enter debug mode
-					debug_menu();
-					break;
-				case 101:
-					// e to change to pid mode
-					machine_state = 0;				
-					// reset PID
-					reset_pid(&pid);
-					break;	
-			}
-			// enable rx interrupts
-			enable_rx_interrupt();
-			*/
 		}
 		else
 		{

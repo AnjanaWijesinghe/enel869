@@ -122,6 +122,21 @@ int read_int()
 	return num;
 }
 
+float read_float()
+{
+	// read an integer value from cli and convert to float
+	char read_str[100] = {0};
+	read_str_usart2(read_str);
+
+	int num = 0;
+	int i = 0;
+	while (read_str[i] && (read_str[i] >= '0' && read_str[i] <= '9')){
+			num = num * 10 + (read_str[i] - '0');
+			i++;
+	}
+	return (float)num/1000;
+}
+
 void print_debug_header(char version[])
 {
 	// print out the version
@@ -211,9 +226,12 @@ void print_main_header(char version[])
 	write_str_usart2("q - enter debug mode");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
+	write_str_usart2("e - enter PID mode");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
 }
 
-void print_values(int machine_state, int curr_servo, int max_servo, int min_servo, int curr_ir, int req_ir, int kp, int ki, int kd, int pid, int pid_mapped)
+void print_values(int machine_state, int curr_servo, int max_servo, int min_servo, int curr_ir, int req_ir, float kp, float ki, float kd, int pid, int pid_mapped)
 {
 	// print the running values
 
@@ -223,9 +241,9 @@ void print_values(int machine_state, int curr_servo, int max_servo, int min_serv
 	char min_servo_str[5];
 	char curr_ir_str[5];
 	char req_ir_str[5];
-	char kp_str[5];
-	char ki_str[5];
-	char kd_str[5];
+	char kp_str[10];
+	char ki_str[10];
+	char kd_str[10];
 	char pid_str[10];
 	char pid_mapped_str[10];
 	
@@ -235,9 +253,9 @@ void print_values(int machine_state, int curr_servo, int max_servo, int min_serv
 	sprintf(min_servo_str,"%d",min_servo);
 	sprintf(curr_ir_str,"%d",curr_ir);
 	sprintf(req_ir_str,"%d",req_ir);
-	sprintf(kp_str,"%d",kp);
-	sprintf(ki_str,"%d",ki);
-	sprintf(kd_str,"%d",kd);
+	sprintf(kp_str,"%f",kp);
+	sprintf(ki_str,"%f",ki);
+	sprintf(kd_str,"%f",kd);
 	sprintf(pid_str,"%d",pid);
 	sprintf(pid_mapped_str,"%d",pid_mapped);
 	

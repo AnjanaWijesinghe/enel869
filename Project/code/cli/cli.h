@@ -7,7 +7,14 @@ void print_main_header(char version[]);
 void print_debug_header(char version[]);
 void write_string(char write_str[]);
 int read_int();
-void print_values(int machine_state, int curr_servo, int max_servo, int min_servo, int req_ir, int curr_ir, int kp, int ki, int kd, int pid, int pid_mapped);
+float read_float();
+void print_values(
+	int machine_state, 
+	int curr_servo, int max_servo, int min_servo, 
+	int req_ir, int curr_ir, 
+	float kp, float ki, float kd, 
+	int pid, int pid_mapped
+);
 void print_ir_only(int curr_ir);
 void enable_rx_interrupt();
 void disable_rx_interrupt();
