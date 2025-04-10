@@ -150,10 +150,10 @@ int read_int(int curr_val)
 			num = num * 10 + (read_str[i] - '0');
 			i++;
 	}
-	if(num == 0)
-	{
-		return curr_val;
-	}
+	//if(num == 0)
+	//{
+	//	return curr_val;
+	//}
 	return num;
 }
 
@@ -200,15 +200,19 @@ void print_debug_header(char version[])
 	write_str_usart2("a - set height value in IR");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
-	write_str_usart2("#1 - set Kp");
+	write_str_usart2("#1 - set Kp (/1000)");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
-	write_str_usart2("#2 - set Ki");
+	write_str_usart2("#2 - set Ki (/1000)");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
-	write_str_usart2("#3 - set Kd");
+	write_str_usart2("#3 - set Kd (/1000)");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
+	write_str_usart2("To enter PID mode, press e after exiting debug menu");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+	
 }
 
 void print_main_header(char version[])
@@ -244,10 +248,11 @@ void print_main_header(char version[])
 	write_ch_usart2('\r');
 }
 
-void print_values(int curr_servo, int max_servo, int min_servo, int curr_ir, int req_ir, int kp, int ki, int kd, int pid)
+void print_values(int machine_state, int curr_servo, int max_servo, int min_servo, int curr_ir, int req_ir, int kp, int ki, int kd, int pid, int pid_mapped)
 {
 	// print the running values
 
+	char machine_state_str[5];
 	char curr_servo_str[5];
 	char max_servo_str[5];
 	char min_servo_str[5];
@@ -256,8 +261,10 @@ void print_values(int curr_servo, int max_servo, int min_servo, int curr_ir, int
 	char kp_str[5];
 	char ki_str[5];
 	char kd_str[5];
-	char pid_str[5];
+	char pid_str[10];
+	char pid_mapped_str[10];
 	
+	sprintf(machine_state_str,"%d",machine_state);
 	sprintf(curr_servo_str,"%d",curr_servo);
 	sprintf(max_servo_str,"%d",max_servo);
 	sprintf(min_servo_str,"%d",min_servo);
@@ -267,9 +274,12 @@ void print_values(int curr_servo, int max_servo, int min_servo, int curr_ir, int
 	sprintf(ki_str,"%d",ki);
 	sprintf(kd_str,"%d",kd);
 	sprintf(pid_str,"%d",pid);
+	sprintf(pid_mapped_str,"%d",pid_mapped);
 	
 	//write_ch_usart2('\n');
-	write_str_usart2("Servo Max: ");
+	write_str_usart2("Mode: ");
+	write_str_usart2(machine_state_str);
+	write_str_usart2(" | Servo Max: ");
 	write_str_usart2(max_servo_str);
 	write_str_usart2(" | Servo Min: ");
 	write_str_usart2(min_servo_str);
@@ -289,7 +299,9 @@ void print_values(int curr_servo, int max_servo, int min_servo, int curr_ir, int
 	write_str_usart2(kd_str);
 	write_str_usart2(" | PID: ");
 	write_str_usart2(pid_str);
-	write_str_usart2("                    ");
+	write_str_usart2(" = ");
+	write_str_usart2(pid_mapped_str);
+	write_str_usart2(" // EOL");
 	//write_ch_usart2('\n');
 	write_ch_usart2('\r');
 }
