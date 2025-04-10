@@ -445,6 +445,11 @@
               <FileType>5</FileType>
               <FilePath>.\code\pid\moving_average_filter.h</FilePath>
             </File>
+            <File>
+              <FileName>initialize_for_ir_range.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\code\utils\initialize_for_ir_range.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -494,6 +499,16 @@
               <FileName>pid.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\code\pid\pid.h</FilePath>
+            </File>
+            <File>
+              <FileName>initialize_for_ir_range.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\utils\initialize_for_ir_range.h</FilePath>
+            </File>
+            <File>
+              <FileName>git-version.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\git-version.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -74,12 +74,13 @@ void PID_Calculation_b(struct PID_Param_t *par, int input_error, int sampling_ra
 	int PID_p, PID_i, PID_d, PID_total;
 	
 	PID_p = par->Kp * input_error;
-	int dist_difference = input_error - par->last_error;
+	//int dist_difference = input_error - par->last_error;
 	PID_d = par->Kd * ((input_error - par->last_error) * sampling_rate);
 	
 	if (-3 < input_error && input_error < 3)
 	{
-		PID_i = PID_i + (par->Ki * input_error);
+		//PID_i = PID_i + (par->Ki * input_error);
+		PID_i = 0;
 	}
 	else
 	{

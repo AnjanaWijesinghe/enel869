@@ -2,6 +2,7 @@
 
 #include "stm32f10x.h"
 
+#include "git-version.h"
 #include "timer/time.h"
 #include "drivers/gpio.h"
 #include "drivers/clock.h"
@@ -13,14 +14,13 @@
 #include "pid/moving_average_filter.h"
 #include "utils/initialize_for_ir_range.h"
 
-
 int adc_val = 0;
 char global_rxb;
 
 struct PID_Param_t pid;
 struct mov_avg_filter mov_avg_instance;
 
-char version[] = "|| version = 0.4.0 ||";
+char version[] = VERSION;
 
 // 0 is control ball mode
 // 1 is debug mode
@@ -57,6 +57,7 @@ void USART2_IRQHandler()
 	// clear interrupt
 	USART2->SR &= ~(1<<5);
 }
+
 
 void debug_menu()
 {
@@ -100,43 +101,43 @@ void debug_menu()
 			write_str_usart2("Set servo high bound: ");
 			// h entered
 			// set servo high point
-			servo_max = read_int(servo_max);
+			servo_max = read_int();
 			break;
 		case 108:
 			write_str_usart2("Set servo low bound: ");
 			// l entered
 			// set servo low point
-			servo_min = read_int(servo_min);
+			servo_min = read_int();
 			break;
 		case 115:
 			write_str_usart2("Set servo value: ");
 			// s entered
 			// set servo value
-			servo_val = custom_servo_val(read_int(servo_val), servo_val, servo_max, servo_min);
+			servo_val = custom_servo_val(read_int(), servo_val, servo_max, servo_min);
 			break;
 		case 49:
 			write_str_usart2("Set Kp value: ");
 			// s entered
 			// set servo value
-			pid.Kp = read_int(servo_val);
+			pid.Kp = read_int();
 			break;
 		case 50:
 			write_str_usart2("Set Ki value: ");
 			// s entered
 			// set servo value
-			pid.Ki = read_int(servo_val);
+			pid.Ki = read_int();
 			break;
 		case 51:
 			write_str_usart2("Set Kd value: ");
 			// s entered
 			// set servo value
-			pid.Kd = read_int(servo_val);
+			pid.Kd = read_int();
 			break;
 		case 97:
 			write_str_usart2("Set height value in IR: ");
 			// s entered
 			// set servo value
-			required_height = read_int(required_height);
+			required_height = read_int();
 			break;
 	}
 	// set the machine back into normal state
@@ -158,7 +159,8 @@ void calibrate_ball_height(int best_ir_level, int matching_servo_level, int wait
 			break;
 		}
 	}
-}	
+}
+
 
 int main(void)
 {

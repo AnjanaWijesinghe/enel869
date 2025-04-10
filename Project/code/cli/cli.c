@@ -1,22 +1,13 @@
+// CLI controller scripts
+// Add the communication between the host and the remote are
+// handled here. 
+// USART2 is enabled for communication
+
 #include "stm32f10x.h"
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "cli.h"
-
-/*char* itoa(int val, int base){
-	
-	static char buf[32] = {0};
-	
-	int i = 30;
-	
-	for(; val && i ; --i, val /= base)
-	
-		buf[i] = "0123456789abcdef"[val % base];
-	
-	return &buf[i+1];
-	
-}*/
 
 void enable_usart2()
 {
@@ -30,32 +21,6 @@ void enable_usart2()
 	//GPIOA->CRL |= 0x2 << 10;
 	
 	GPIOA->CRL |= 0x4 << 12;
-	//GPIOA->CRL |= 0x1 << 14;
-	/*GPIOA->CRL    &= ( GPIO_CRL_MODE2 |
-										 GPIO_CRL_CNF2 |
-										 GPIO_CRL_MODE3 |
-										 GPIO_CRL_CNF3 );
-	GPIOA->CRL    |= ( ( 0x1 << GPIO_CRL_MODE2_Pos ) |
-										 ( 0x2 << GPIO_CRL_CNF2_Pos ) |
-										 ( 0x0 << GPIO_CRL_MODE3_Pos ) |
-										 ( 0x1 << GPIO_CRL_CNF3_Pos ) );*/
-	// set baudrate
-	//uint32_t baudrate = 115200;
-	//uint32_t uartdiv = SystemCoreClock / baudrate;
-	//USART2->BRR = ((SystemCoreClock + (baudrate / 2u)) / baudrate);
-	//uint16_t uartdiv = SystemCoreClock / 115200;
-	//USART2->BRR = (uartdiv % 16) << 0;
-	//USART2->BRR |= (uartdiv / 16) << 4;
-	//USART2->BRR = 625u;
-	//USART2->BRR |= 27u<<4;
-	// usartdiv = 39.0625
-	// mantissa 39 -> 27 hex
-	// fraction 1 -> 1 hex
-	
-	// USART2 is connected to APB1 which is at 36Mhz (max available for this)
-	// USARTDIV = 19.53125
-	// Mantissa = 13
-	// Fraction = 9
 	
 	USART2->BRR = 0x138;
 	
@@ -138,7 +103,7 @@ void read_str_usart2(char read_str[])
 	} while(rxb != 13);
 }
 
-int read_int(int curr_val)
+int read_int()
 {
 	// read an integer value from cli
 	char read_str[100] = {0};
@@ -164,7 +129,7 @@ void print_debug_header(char version[])
 	write_ch_usart2('\n');
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
-	write_str_usart2("||----||");
+	write_str_usart2("||----|| version: ");
 	write_str_usart2(version);
 	write_str_usart2("||----||");
 	write_ch_usart2('\n');
