@@ -1,0 +1,22 @@
+\doxysection{moving\+\_\+average\+\_\+filter.\+h}
+\hypertarget{moving__average__filter_8h_source}{}\label{moving__average__filter_8h_source}\index{pid/moving\_average\_filter.h@{pid/moving\_average\_filter.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MOVING\_AVERAGE\_FILTER\_}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MOVING\_AVERAGE\_FILTER\_}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ MOVING\_AVERAGE\_LENGTH\ 5}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmov__avg__filter}{mov\_avg\_filter}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keywordtype}{int}\ buffer[MOVING\_AVERAGE\_LENGTH];}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{int}\ counter;}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{int}\ out;}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{int}\ sum;}
+\DoxyCodeLine{00011\ \};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keywordtype}{void}\ reset\_average\_filter(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structmov__avg__filter}{mov\_avg\_filter}}*\ instance);}
+\DoxyCodeLine{00014\ \textcolor{keywordtype}{void}\ apply\_average\_filter(\textcolor{keyword}{struct}\ \mbox{\hyperlink{structmov__avg__filter}{mov\_avg\_filter}}*\ instance,\ \textcolor{keywordtype}{int}\ input,\ \textcolor{keywordtype}{int}\ *out);}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MOVING\_AVERAGE\_FILTER\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}
