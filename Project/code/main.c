@@ -11,6 +11,7 @@
 #include "ir/ir.h"
 #include "pid/pid.h"
 #include "pid/moving_average_filter.h"
+#include "utils/initialize_for_ir_range.h"
 
 
 int adc_val = 0;
@@ -23,7 +24,7 @@ char version[] = "|| version = 0.4.0 ||";
 
 // 0 is control ball mode
 // 1 is debug mode
-int machine_state = 0;
+int machine_state = 1;
 
 // setting default servo values
 int servo_max = 2600;
@@ -139,14 +140,30 @@ void debug_menu()
 			break;
 	}
 	// set the machine back into normal state
-	machine_state = 0;
+	// machine_state = 0;
 }
 
+
+
+void calibrate_ball_height(int best_ir_level, int matching_servo_level, int wait_time)
+{
+	while (1)
+	{
+		servo_val = custom_servo_val(servo_min, servo_val, servo_max, servo_min);
+		TDelay_Millis(wait_time);
+		servo_val = custom_servo_val(matching_servo_level, servo_val, servo_max, servo_min);
+		TDelay_Millis(wait_time*5);			
+		if ((best_ir_level - 10) <= adc_val && adc_val <= (best_ir_level + 10))
+		{
+			break;
+		}
+	}
+}	
 
 int main(void)
 {
 	// set defaults for pid and moving average
-	set_pid_gain(&pid, 5, 5, 5);
+	set_pid_gain(&pid, 0, 0, 0);
 	reset_average_filter(&mov_avg_instance);
 	
 	// enable timer 1 with 72 prescaler
@@ -186,24 +203,55 @@ int main(void)
 	//char read_str[100] = {0};
 	
 	print_main_header(version);
+	//calibrate_ball_height(2700, 2388, 1000);
+	// reset servo
+	int input_error = 0;
+	int sampling_rate = 100;
+	servo_val = custom_servo_val(servo_max, servo_val, servo_max, servo_min);
 	while (1) 
 	{
-		print_values(servo_val, servo_max, servo_min, adc_val, required_height, pid.Kp, pid.Ki, pid.Kd, pid.output);
+		input_error = adc_val - required_height;
+		print_values(machine_state, servo_val, servo_max, servo_min, adc_val, required_height, pid.Kp, pid.Ki, pid.Kd, pid.output, input_error);
 		
 		if(machine_state == 0)
 		{
 			// PID mode
 			//PID_Calculation(&pid, adc_val - required_height, 1000);
-			PID_Calculation_b(&pid, adc_val - required_height, 1000);
-			PID_map(&pid, servo_max, servo_min, 2850, 2450);
+			//PID_Calculation_b(&pid, adc_val - required_height, 10);
+			//PID_map(&pid, servo_val, 20, -20);
+			//servo_val = custom_servo_val(pid.output_mapped, servo_val, servo_max, servo_min);
+			//servo_val = simple_step_calculation(servo_val, adc_val - required_height, 10);
+/*			servo_val = custom_servo_val(
+				simple_step_calculation(servo_val, adc_val - required_height, 10), 
+				servo_val, 
+				servo_max, 
+				servo_min
+			);*/
+			/*
+			if (input_error >= 10)
+			{
+				servo_val = increase_servo_val(5, servo_val, servo_max, servo_min);
+			}
+			else if (input_error <= -10)
+			{
+				servo_val = decrease_servo_val(5, servo_val, servo_max, servo_min);
+			}
+			*/
+			// calculating PID
+			PID_Calculation_c(&pid, input_error, sampling_rate);
+			// limiting the pid to the given range
+			PID_map(&pid, 50, -50);
+			// setting servo value
 			servo_val = custom_servo_val(pid.output_mapped, servo_val, servo_max, servo_min);
-			TDelay_Millis(1);
+			
+			TDelay_Millis(sampling_rate);
 		}
 		else if (machine_state == 1)
 		{
-			// limbo mode
+			// setting machine state to limbo (waiting for interrupt)
+			machine_state = 2;
+			// manual mode
 			disable_rx_interrupt();
-			
 			switch(global_rxb)
 			{
 				case 114:
@@ -232,15 +280,116 @@ int main(void)
 					servo_val = decrease_servo_val(10, servo_val, servo_max, servo_min);
 					break;
 				case 113:
+					// q to enter debug mode
 					debug_menu();
 					break;
+				case 101:
+					// e to change to pid mode
+					machine_state = 0;				
+					// reset PID
+					reset_pid(&pid);
+					break;	
 			}
-			machine_state = 0;
 			// enable rx interrupts
 			enable_rx_interrupt();
+			/*
+			int exit_manual_mode = 0;
+			while (1)
+			{
+				print_values(machine_state, servo_val, servo_max, servo_min, adc_val, required_height, pid.Kp, pid.Ki, pid.Kd, pid.output, input_error);
+				char rxb;
+				// read input
+				rxb = read_ch_usart2();
+				switch(rxb)
+				{
+					case 114:
+						//write_str_usart2("refresh");
+						// r entered
+						// refresh window
+						break;
+					case 105:
+						// i entered
+						// increase servo by 1
+						servo_val = increase_servo_val(1, servo_val, servo_max, servo_min);
+						break;
+					case 73:
+						// I entered
+						// increase servo by 10
+						servo_val = increase_servo_val(10, servo_val, servo_max, servo_min);
+						break;
+					case 100:
+						// d entered
+						// decrease servo by 1
+						servo_val = decrease_servo_val(1, servo_val, servo_max, servo_min);
+						break;
+					case 68:
+						// D entered
+						// decrease servo by 10
+						servo_val = decrease_servo_val(10, servo_val, servo_max, servo_min);
+						break;
+					case 113:
+						// q to enter debug mode
+						debug_menu();
+						break;
+					case 101:
+						// e to change to pid mode
+						machine_state = 0;				
+						// reset PID
+						reset_pid(&pid);
+						exit_manual_mode = 1;
+						break;	
+				}
+				if (exit_manual_mode == 1)
+				{
+					break;
+				}
+			}
+			*/
+			/*switch(global_rxb)
+			{
+				case 114:
+					//write_str_usart2("refresh");
+					// r entered
+					// refresh window
+					break;
+				case 105:
+					// i entered
+					// increase servo by 1
+					servo_val = increase_servo_val(1, servo_val, servo_max, servo_min);
+					break;
+				case 73:
+					// I entered
+					// increase servo by 10
+					servo_val = increase_servo_val(10, servo_val, servo_max, servo_min);
+					break;
+				case 100:
+					// d entered
+					// decrease servo by 1
+					servo_val = decrease_servo_val(1, servo_val, servo_max, servo_min);
+					break;
+				case 68:
+					// D entered
+					// decrease servo by 10
+					servo_val = decrease_servo_val(10, servo_val, servo_max, servo_min);
+					break;
+				case 113:
+					// q to enter debug mode
+					debug_menu();
+					break;
+				case 101:
+					// e to change to pid mode
+					machine_state = 0;				
+					// reset PID
+					reset_pid(&pid);
+					break;	
+			}
+			// enable rx interrupts
+			enable_rx_interrupt();
+			*/
 		}
 		else
 		{
+			// limbo mode
 		}
 	}   
 }
