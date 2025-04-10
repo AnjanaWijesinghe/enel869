@@ -8,5 +8,6 @@ var files_dup =
     [ "servo", "dir_9e94c91128f2402217e3120e64a4fd79.html", "dir_9e94c91128f2402217e3120e64a4fd79" ],
     [ "timer", "dir_9036e41d25fd211dc511cf15bbb9a828.html", "dir_9036e41d25fd211dc511cf15bbb9a828" ],
     [ "utils", "dir_cbdb8362360e11eafe2fa3bc74cf0ffd.html", "dir_cbdb8362360e11eafe2fa3bc74cf0ffd" ],
-    [ "main.h", "main_8h_source.html", null ]
+    [ "git-version.h", "git-version_8h_source.html", null ],
+    [ "main.h", "main_8h.html", "main_8h" ]
 ];

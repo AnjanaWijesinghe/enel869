@@ -32,9 +32,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Ball height controller<span id="projectnumber">&#160;0.2.0</span>
+   <div id="projectname">Ball height controller
    </div>
-   <div id="projectbrief">Controls the height of a ball in a tube by chaging the air flow</div>
+   <div id="projectbrief">Controls the height of a floating ball in a tube by regulating the air flow</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -106,25 +106,49 @@ $(function(){initNavTree('cli_8h_source.html',''); initResizable(true); });
   <div class="headertitle"><div class="title">cli.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keywordtype">void</span> enable_usart2();</div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keywordtype">void</span> write_ch_usart2(<span class="keywordtype">int</span> ch);</div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keywordtype">char</span> read_ch_usart2();</div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keywordtype">void</span> write_str_usart2(<span class="keywordtype">char</span> write_str[]);</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keywordtype">void</span> read_str_usart2(<span class="keywordtype">char</span> read_str[]);</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keywordtype">void</span> print_main_header(<span class="keywordtype">char</span> version[]);</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keywordtype">void</span> print_debug_header(<span class="keywordtype">char</span> version[]);</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keywordtype">void</span> write_string(<span class="keywordtype">char</span> write_str[]);</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keywordtype">int</span> read_int(<span class="keywordtype">int</span> curr_val);</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">void</span> print_values(<span class="keywordtype">int</span> machine_state, <span class="keywordtype">int</span> curr_servo, <span class="keywordtype">int</span> max_servo, <span class="keywordtype">int</span> min_servo, <span class="keywordtype">int</span> req_ir, <span class="keywordtype">int</span> curr_ir, <span class="keywordtype">int</span> kp, <span class="keywordtype">int</span> ki, <span class="keywordtype">int</span> kd, <span class="keywordtype">int</span> pid, <span class="keywordtype">int</span> pid_mapped);</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keywordtype">void</span> print_ir_only(<span class="keywordtype">int</span> curr_ir);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">void</span> enable_rx_interrupt();</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keywordtype">void</span> disable_rx_interrupt();</div>
+<a href="cli_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keywordtype">void</span> <a class="code hl_function" href="cli_8h.html#a3948bf497eb71b1d2efcec642070f063">enable_usart2</a>();</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keywordtype">void</span> <a class="code hl_function" href="cli_8h.html#a1f9493e4bb53767973c8c52d3f055483">write_ch_usart2</a>(<span class="keywordtype">int</span> ch);</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">char</span> <a class="code hl_function" href="cli_8h.html#ac5dcd5cf0bce5fd6e6228b5471658242">read_ch_usart2</a>();</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keywordtype">void</span> <a class="code hl_function" href="cli_8h.html#a1bfac0f1111ad000a6f9f633b6af0def">write_str_usart2</a>(<span class="keywordtype">char</span> write_str[]);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">void</span> <a class="code hl_function" href="cli_8h.html#ab1c61fad18087de42ea5e9edb58b9ddf">read_str_usart2</a>(<span class="keywordtype">char</span> read_str[]);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">void</span> <a class="code hl_function" href="cli_8h.html#aaff70ee0760ddd0f3dcb726c5afa27fc">print_main_header</a>(<span class="keywordtype">char</span> version[]);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> <a class="code hl_function" href="cli_8h.html#a71289c3489aeaad1bf5ce9975fa3cfcc">print_debug_header</a>(<span class="keywordtype">char</span> version[]);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">void</span> <a class="code hl_function" href="cli_8h.html#aece4065cc8ec1b2ca787bcaaa54cc53a">write_string</a>(<span class="keywordtype">char</span> write_str[]);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">int</span> <a class="code hl_function" href="cli_8h.html#af310540093ee953c3018bc13bbde3da5">read_int</a>();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keywordtype">float</span> <a class="code hl_function" href="cli_8h.html#ae325714126832a42ffe7cca204819598">read_float</a>();</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keywordtype">void</span> <a class="code hl_function" href="cli_8h.html#a1f04884bb00ed684939a0c6950d20f0a">print_values</a>(</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">int</span> machine_state, </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">int</span> curr_servo, <span class="keywordtype">int</span> max_servo, <span class="keywordtype">int</span> min_servo, </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">int</span> req_ir, <span class="keywordtype">int</span> curr_ir, </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">float</span> kp, <span class="keywordtype">float</span> ki, <span class="keywordtype">float</span> kd, </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">int</span> pid, <span class="keywordtype">int</span> pid_mapped</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keywordtype">void</span> <a class="code hl_function" href="cli_8h.html#ad10c88a392b02908cca3ca9dacbab009">print_ir_only</a>(<span class="keywordtype">int</span> curr_ir);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keywordtype">void</span> <a class="code hl_function" href="cli_8h.html#abe695d3356ac1407f0ab51f863004ae4">enable_rx_interrupt</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keywordtype">void</span> <a class="code hl_function" href="cli_8h.html#a50f9b0d723579aa478a2403686afbb08">disable_rx_interrupt</a>();</div>
+<div class="ttc" id="acli_8h_html_a1bfac0f1111ad000a6f9f633b6af0def"><div class="ttname"><a href="cli_8h.html#a1bfac0f1111ad000a6f9f633b6af0def">write_str_usart2</a></div><div class="ttdeci">void write_str_usart2(char write_str[])</div><div class="ttdef"><b>Definition</b> cli.c:59</div></div>
+<div class="ttc" id="acli_8h_html_a1f04884bb00ed684939a0c6950d20f0a"><div class="ttname"><a href="cli_8h.html#a1f04884bb00ed684939a0c6950d20f0a">print_values</a></div><div class="ttdeci">void print_values(int machine_state, int curr_servo, int max_servo, int min_servo, int req_ir, int curr_ir, float kp, float ki, float kd, int pid, int pid_mapped)</div><div class="ttdoc">Print values about the state of the machine.</div><div class="ttdef"><b>Definition</b> cli.c:234</div></div>
+<div class="ttc" id="acli_8h_html_a1f9493e4bb53767973c8c52d3f055483"><div class="ttname"><a href="cli_8h.html#a1f9493e4bb53767973c8c52d3f055483">write_ch_usart2</a></div><div class="ttdeci">void write_ch_usart2(int ch)</div><div class="ttdef"><b>Definition</b> cli.c:52</div></div>
+<div class="ttc" id="acli_8h_html_a3948bf497eb71b1d2efcec642070f063"><div class="ttname"><a href="cli_8h.html#a3948bf497eb71b1d2efcec642070f063">enable_usart2</a></div><div class="ttdeci">void enable_usart2()</div><div class="ttdoc">Enable USART2.</div><div class="ttdef"><b>Definition</b> cli.c:12</div></div>
+<div class="ttc" id="acli_8h_html_a50f9b0d723579aa478a2403686afbb08"><div class="ttname"><a href="cli_8h.html#a50f9b0d723579aa478a2403686afbb08">disable_rx_interrupt</a></div><div class="ttdeci">void disable_rx_interrupt()</div><div class="ttdoc">Disables interrupts from a key press.</div><div class="ttdef"><b>Definition</b> cli.c:46</div></div>
+<div class="ttc" id="acli_8h_html_a71289c3489aeaad1bf5ce9975fa3cfcc"><div class="ttname"><a href="cli_8h.html#a71289c3489aeaad1bf5ce9975fa3cfcc">print_debug_header</a></div><div class="ttdeci">void print_debug_header(char version[])</div><div class="ttdef"><b>Definition</b> cli.c:140</div></div>
+<div class="ttc" id="acli_8h_html_aaff70ee0760ddd0f3dcb726c5afa27fc"><div class="ttname"><a href="cli_8h.html#aaff70ee0760ddd0f3dcb726c5afa27fc">print_main_header</a></div><div class="ttdeci">void print_main_header(char version[])</div><div class="ttdef"><b>Definition</b> cli.c:198</div></div>
+<div class="ttc" id="acli_8h_html_ab1c61fad18087de42ea5e9edb58b9ddf"><div class="ttname"><a href="cli_8h.html#ab1c61fad18087de42ea5e9edb58b9ddf">read_str_usart2</a></div><div class="ttdeci">void read_str_usart2(char read_str[])</div><div class="ttdef"><b>Definition</b> cli.c:91</div></div>
+<div class="ttc" id="acli_8h_html_abe695d3356ac1407f0ab51f863004ae4"><div class="ttname"><a href="cli_8h.html#abe695d3356ac1407f0ab51f863004ae4">enable_rx_interrupt</a></div><div class="ttdeci">void enable_rx_interrupt()</div><div class="ttdoc">Enable interrupts from a key press.</div><div class="ttdef"><b>Definition</b> cli.c:40</div></div>
+<div class="ttc" id="acli_8h_html_ac5dcd5cf0bce5fd6e6228b5471658242"><div class="ttname"><a href="cli_8h.html#ac5dcd5cf0bce5fd6e6228b5471658242">read_ch_usart2</a></div><div class="ttdeci">char read_ch_usart2()</div><div class="ttdef"><b>Definition</b> cli.c:83</div></div>
+<div class="ttc" id="acli_8h_html_ad10c88a392b02908cca3ca9dacbab009"><div class="ttname"><a href="cli_8h.html#ad10c88a392b02908cca3ca9dacbab009">print_ir_only</a></div><div class="ttdeci">void print_ir_only(int curr_ir)</div><div class="ttdef"><b>Definition</b> cli.c:292</div></div>
+<div class="ttc" id="acli_8h_html_ae325714126832a42ffe7cca204819598"><div class="ttname"><a href="cli_8h.html#ae325714126832a42ffe7cca204819598">read_float</a></div><div class="ttdeci">float read_float()</div><div class="ttdoc">Reads a float.</div><div class="ttdef"><b>Definition</b> cli.c:125</div></div>
+<div class="ttc" id="acli_8h_html_aece4065cc8ec1b2ca787bcaaa54cc53a"><div class="ttname"><a href="cli_8h.html#aece4065cc8ec1b2ca787bcaaa54cc53a">write_string</a></div><div class="ttdeci">void write_string(char write_str[])</div><div class="ttdef"><b>Definition</b> cli.c:75</div></div>
+<div class="ttc" id="acli_8h_html_af310540093ee953c3018bc13bbde3da5"><div class="ttname"><a href="cli_8h.html#af310540093ee953c3018bc13bbde3da5">read_int</a></div><div class="ttdeci">int read_int()</div><div class="ttdoc">Reads an int.</div><div class="ttdef"><b>Definition</b> cli.c:106</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_2990d7c532eb7441b74916b8f5365141.html">cli</a></li><li class="navelem"><b>cli.h</b></li>
+    <li class="navelem"><a class="el" href="dir_2990d7c532eb7441b74916b8f5365141.html">cli</a></li><li class="navelem"><a class="el" href="cli_8h.html">cli.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
   </ul>
 </div>

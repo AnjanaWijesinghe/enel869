@@ -32,9 +32,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Ball height controller<span id="projectnumber">&#160;0.2.0</span>
+   <div id="projectname">Ball height controller
    </div>
-   <div id="projectbrief">Controls the height of a ball in a tube by chaging the air flow</div>
+   <div id="projectbrief">Controls the height of a floating ball in a tube by regulating the air flow</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -106,44 +106,51 @@ $(function(){initNavTree('pid_8h_source.html',''); initResizable(true); });
   <div class="headertitle"><div class="title">pid.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef PID_H_</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define PID_H_</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="foldopen" id="foldopen00004" data-start="{" data-end="};">
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="struct_p_i_d___param__t.html">    4</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>{</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>    <span class="keywordtype">float</span> Kp;</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>    <span class="keywordtype">float</span> Ki;</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keywordtype">float</span> Kd;</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keywordtype">float</span> last_error;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordtype">float</span> last_last_error;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">float</span> error_integral;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">float</span> output;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">float</span> Ts;</div>
+<a href="pid_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#ifndef PID_H_</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#define PID_H_</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span></div>
+<div class="foldopen" id="foldopen00006" data-start="{" data-end="};">
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="struct_p_i_d___param__t.html">    6</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>{</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keywordtype">float</span> Kp;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keywordtype">float</span> Ki;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keywordtype">float</span> Kd;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">float</span> last_error;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <span class="keywordtype">float</span> last_last_error;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">float</span> error_integral;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">float</span> output;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">int</span> output_mapped;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>};</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">float</span> Ts;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">int</span> output_mapped;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>};</div>
 </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">void</span> set_pid_gain(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, <span class="keywordtype">float</span> p, <span class="keywordtype">float</span> i, <span class="keywordtype">float</span> d);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> reset_pid(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> PID_Calculation(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, <span class="keywordtype">int</span> input_error, <span class="keywordtype">int</span> sampling_rate);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">void</span> PID_Calculation_b(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, <span class="keywordtype">int</span> input_error, <span class="keywordtype">int</span> sampling_rate);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> PID_Calculation_c(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, <span class="keywordtype">int</span> input_error, <span class="keywordtype">int</span> sampling_rate);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">void</span> PID_map(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, <span class="keywordtype">int</span> servo_max, <span class="keywordtype">int</span> servo_min);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">int</span> simple_step_calculation(<span class="keywordtype">int</span> curr_val, <span class="keywordtype">int</span> input_error, <span class="keywordtype">int</span> step_len);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif </span><span class="comment">/* PID_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="astruct_p_i_d___param__t_html"><div class="ttname"><a href="struct_p_i_d___param__t.html">PID_Param_t</a></div><div class="ttdef"><b>Definition</b> pid.h:5</div></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">void</span> <a class="code hl_function" href="pid_8h.html#a1bc16ed41702e0d7eead8bd1619804ab">set_pid_gain</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, <span class="keywordtype">float</span> p, <span class="keywordtype">float</span> i, <span class="keywordtype">float</span> d);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">void</span> <a class="code hl_function" href="pid_8h.html#aabbca2c8b2d09ca53e04d3c9fd5c0016">reset_pid</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">void</span> <a class="code hl_function" href="pid_8h.html#a4b5007ae9541bed8dc20f6104de8c107">PID_Calculation</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, <span class="keywordtype">int</span> input_error, <span class="keywordtype">int</span> sampling_rate);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keywordtype">void</span> <a class="code hl_function" href="pid_8h.html#a62b36219fee9983f734ae1ecc49d9f5c">PID_Calculation_b</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, <span class="keywordtype">int</span> input_error, <span class="keywordtype">int</span> sampling_rate);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keywordtype">void</span> <a class="code hl_function" href="pid_8h.html#a1dc688d4ea6d351ba3b262b196d71075">PID_Calculation_c</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, <span class="keywordtype">int</span> input_error, <span class="keywordtype">int</span> sampling_rate);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keywordtype">void</span> <a class="code hl_function" href="pid_8h.html#a608ca12cdce6f25c4c3aea4cab8872e6">PID_map</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, <span class="keywordtype">int</span> servo_max, <span class="keywordtype">int</span> servo_min);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keywordtype">int</span> <a class="code hl_function" href="pid_8h.html#aabbd00a8e31938c588a1859807eba679">simple_step_calculation</a>(<span class="keywordtype">int</span> curr_val, <span class="keywordtype">int</span> input_error, <span class="keywordtype">int</span> step_len);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#endif </span><span class="comment">/* PID_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="apid_8h_html_a1bc16ed41702e0d7eead8bd1619804ab"><div class="ttname"><a href="pid_8h.html#a1bc16ed41702e0d7eead8bd1619804ab">set_pid_gain</a></div><div class="ttdeci">void set_pid_gain(struct PID_Param_t *par, float p, float i, float d)</div><div class="ttdef"><b>Definition</b> pid.c:6</div></div>
+<div class="ttc" id="apid_8h_html_a1dc688d4ea6d351ba3b262b196d71075"><div class="ttname"><a href="pid_8h.html#a1dc688d4ea6d351ba3b262b196d71075">PID_Calculation_c</a></div><div class="ttdeci">void PID_Calculation_c(struct PID_Param_t *par, int input_error, int sampling_rate)</div><div class="ttdef"><b>Definition</b> pid.c:94</div></div>
+<div class="ttc" id="apid_8h_html_a4b5007ae9541bed8dc20f6104de8c107"><div class="ttname"><a href="pid_8h.html#a4b5007ae9541bed8dc20f6104de8c107">PID_Calculation</a></div><div class="ttdeci">void PID_Calculation(struct PID_Param_t *par, int input_error, int sampling_rate)</div><div class="ttdef"><b>Definition</b> pid.c:47</div></div>
+<div class="ttc" id="apid_8h_html_a608ca12cdce6f25c4c3aea4cab8872e6"><div class="ttname"><a href="pid_8h.html#a608ca12cdce6f25c4c3aea4cab8872e6">PID_map</a></div><div class="ttdeci">void PID_map(struct PID_Param_t *par, int servo_max, int servo_min)</div><div class="ttdef"><b>Definition</b> pid.c:110</div></div>
+<div class="ttc" id="apid_8h_html_a62b36219fee9983f734ae1ecc49d9f5c"><div class="ttname"><a href="pid_8h.html#a62b36219fee9983f734ae1ecc49d9f5c">PID_Calculation_b</a></div><div class="ttdeci">void PID_Calculation_b(struct PID_Param_t *par, int input_error, int sampling_rate)</div><div class="ttdef"><b>Definition</b> pid.c:72</div></div>
+<div class="ttc" id="apid_8h_html_aabbca2c8b2d09ca53e04d3c9fd5c0016"><div class="ttname"><a href="pid_8h.html#aabbca2c8b2d09ca53e04d3c9fd5c0016">reset_pid</a></div><div class="ttdeci">void reset_pid(struct PID_Param_t *par)</div><div class="ttdoc">Reset PID values (does not affect p, i, and d).</div><div class="ttdef"><b>Definition</b> pid.c:22</div></div>
+<div class="ttc" id="apid_8h_html_aabbd00a8e31938c588a1859807eba679"><div class="ttname"><a href="pid_8h.html#aabbd00a8e31938c588a1859807eba679">simple_step_calculation</a></div><div class="ttdeci">int simple_step_calculation(int curr_val, int input_error, int step_len)</div><div class="ttdef"><b>Definition</b> pid.c:34</div></div>
+<div class="ttc" id="astruct_p_i_d___param__t_html"><div class="ttname"><a href="struct_p_i_d___param__t.html">PID_Param_t</a></div><div class="ttdoc">PID parameters.</div><div class="ttdef"><b>Definition</b> pid.h:7</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_92a1a7c0ab61b5eb55ed2567221d2809.html">pid</a></li><li class="navelem"><b>pid.h</b></li>
+    <li class="navelem"><a class="el" href="dir_92a1a7c0ab61b5eb55ed2567221d2809.html">pid</a></li><li class="navelem"><a class="el" href="pid_8h.html">pid.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
   </ul>
 </div>
