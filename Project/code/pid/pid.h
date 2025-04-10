@@ -3,13 +3,14 @@
 
 struct PID_Param_t
 {
-	int Kp;
-	int Ki;
-	int Kd;
+	float Kp;
+	float Ki;
+	float Kd;
 	
-	int last_error;
-	int error_integral;
-	int output;
+	float last_error;
+	float last_last_error;
+	float error_integral;
+	float output;
 	
 	float Ts;
 	
@@ -17,10 +18,12 @@ struct PID_Param_t
 };
 
 	
-void set_pid_gain(struct PID_Param_t *par, int p, int i, int d);
+void set_pid_gain(struct PID_Param_t *par, float p, float i, float d);
 void reset_pid(struct PID_Param_t *par);
 void PID_Calculation(struct PID_Param_t *par, int input_error, int sampling_rate);
 void PID_Calculation_b(struct PID_Param_t *par, int input_error, int sampling_rate);
-void PID_map(struct PID_Param_t *par, int servo_max, int servo_min, int ir_max, int ir_min);
+void PID_Calculation_c(struct PID_Param_t *par, int input_error, int sampling_rate);
+void PID_map(struct PID_Param_t *par, int servo_max, int servo_min);
+int simple_step_calculation(int curr_val, int input_error, int step_len);
 
 #endif /* PID_H_ */
