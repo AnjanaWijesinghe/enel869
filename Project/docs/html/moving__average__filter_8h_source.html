@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ball height controller: pid/moving_average_filter.h Source File</title>
+<title>Ball height controller: enel869/Project/code/pid/moving_average_filter.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -111,29 +111,31 @@ $(function(){initNavTree('moving__average__filter_8h_source.html',''); initResiz
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#define MOVING_AVERAGE_FILTER_</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#define MOVING_AVERAGE_LENGTH 5</span></div>
-<div class="foldopen" id="foldopen00007" data-start="{" data-end="};">
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="structmov__avg__filter.html">    7</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structmov__avg__filter.html">mov_avg_filter</a></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keywordtype">int</span> buffer[MOVING_AVERAGE_LENGTH];</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keywordtype">int</span> counter;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordtype">int</span> out;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">int</span> sum;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>};</div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="structmov__avg__filter.html">   12</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structmov__avg__filter.html">mov_avg_filter</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">int</span> buffer[MOVING_AVERAGE_LENGTH];</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">int</span> counter;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">int</span> out;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">int</span> sum;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>};</div>
 </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keywordtype">void</span> <a class="code hl_function" href="moving__average__filter_8h.html#a3427f0d5fd5a033755a2ecdc82061c1b">reset_average_filter</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structmov__avg__filter.html">mov_avg_filter</a>* instance);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> <a class="code hl_function" href="moving__average__filter_8h.html#ade4757fd4541a83f2b925917b3ac63f9">apply_average_filter</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structmov__avg__filter.html">mov_avg_filter</a>* instance, <span class="keywordtype">int</span> input, <span class="keywordtype">int</span> *out);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#endif </span><span class="comment">/* MOVING_AVERAGE_FILTER_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="amoving__average__filter_8h_html_a3427f0d5fd5a033755a2ecdc82061c1b"><div class="ttname"><a href="moving__average__filter_8h.html#a3427f0d5fd5a033755a2ecdc82061c1b">reset_average_filter</a></div><div class="ttdeci">void reset_average_filter(struct mov_avg_filter *instance)</div><div class="ttdef"><b>Definition</b> moving_average_filter.c:3</div></div>
-<div class="ttc" id="amoving__average__filter_8h_html_ade4757fd4541a83f2b925917b3ac63f9"><div class="ttname"><a href="moving__average__filter_8h.html#ade4757fd4541a83f2b925917b3ac63f9">apply_average_filter</a></div><div class="ttdeci">void apply_average_filter(struct mov_avg_filter *instance, int input, int *out)</div><div class="ttdef"><b>Definition</b> moving_average_filter.c:14</div></div>
-<div class="ttc" id="astructmov__avg__filter_html"><div class="ttname"><a href="structmov__avg__filter.html">mov_avg_filter</a></div><div class="ttdoc">Moving average filter.</div><div class="ttdef"><b>Definition</b> moving_average_filter.h:8</div></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> <a class="code hl_function" href="moving__average__filter_8h.html#a3427f0d5fd5a033755a2ecdc82061c1b">reset_average_filter</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structmov__avg__filter.html">mov_avg_filter</a>* instance);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">void</span> <a class="code hl_function" href="moving__average__filter_8h.html#ade4757fd4541a83f2b925917b3ac63f9">apply_average_filter</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structmov__avg__filter.html">mov_avg_filter</a>* instance, <span class="keywordtype">int</span> input, <span class="keywordtype">int</span> *out);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keywordtype">void</span> <a class="code hl_function" href="moving__average__filter_8h.html#a404ae3aee9822c98770d1ae5313e4b39">apply_median_filter</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structmov__avg__filter.html">mov_avg_filter</a>* instance, <span class="keywordtype">int</span> input, <span class="keywordtype">int</span> *out);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif </span><span class="comment">/* MOVING_AVERAGE_FILTER_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="amoving__average__filter_8h_html_a3427f0d5fd5a033755a2ecdc82061c1b"><div class="ttname"><a href="moving__average__filter_8h.html#a3427f0d5fd5a033755a2ecdc82061c1b">reset_average_filter</a></div><div class="ttdeci">void reset_average_filter(struct mov_avg_filter *instance)</div><div class="ttdef"><b>Definition</b> moving_average_filter.c:7</div></div>
+<div class="ttc" id="amoving__average__filter_8h_html_a404ae3aee9822c98770d1ae5313e4b39"><div class="ttname"><a href="moving__average__filter_8h.html#a404ae3aee9822c98770d1ae5313e4b39">apply_median_filter</a></div><div class="ttdeci">void apply_median_filter(struct mov_avg_filter *instance, int input, int *out)</div><div class="ttdef"><b>Definition</b> moving_average_filter.c:41</div></div>
+<div class="ttc" id="amoving__average__filter_8h_html_ade4757fd4541a83f2b925917b3ac63f9"><div class="ttname"><a href="moving__average__filter_8h.html#ade4757fd4541a83f2b925917b3ac63f9">apply_average_filter</a></div><div class="ttdeci">void apply_average_filter(struct mov_avg_filter *instance, int input, int *out)</div><div class="ttdef"><b>Definition</b> moving_average_filter.c:18</div></div>
+<div class="ttc" id="astructmov__avg__filter_html"><div class="ttname"><a href="structmov__avg__filter.html">mov_avg_filter</a></div><div class="ttdef"><b>Definition</b> moving_average_filter.h:13</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_92a1a7c0ab61b5eb55ed2567221d2809.html">pid</a></li><li class="navelem"><a class="el" href="moving__average__filter_8h.html">moving_average_filter.h</a></li>
+    <li class="navelem"><a class="el" href="dir_1bcea10d60cb58501dd74b8952fc1655.html">enel869</a></li><li class="navelem"><a class="el" href="dir_0dfab01d7c496a7ab77f0bde688f2d17.html">Project</a></li><li class="navelem"><a class="el" href="dir_c5343973af58fc240f1a1fd76af218bc.html">code</a></li><li class="navelem"><a class="el" href="dir_efb7259e7cd63cb3727001460fb92025.html">pid</a></li><li class="navelem"><a class="el" href="moving__average__filter_8h.html">moving_average_filter.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
   </ul>
 </div>

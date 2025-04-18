@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ball height controller: servo/servo.h Source File</title>
+<title>Ball height controller: enel869/Project/code/servo/servo.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -109,12 +109,16 @@ $(function(){initNavTree('servo_8h_source.html',''); initResizable(true); });
 <a href="servo_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keywordtype">void</span> <a class="code hl_function" href="servo_8h.html#af09405151af3dd02f09add6e8c618fb3">setup_servo_timer</a>(<span class="keywordtype">int</span> ccr2);</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keywordtype">int</span> <a class="code hl_function" href="servo_8h.html#aec177b83782416ac6de173870f07ace7">set_servo_val</a>(<span class="keywordtype">int</span> val, <span class="keywordtype">int</span> max_val, <span class="keywordtype">int</span> min_val);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keywordtype">int</span> <a class="code hl_function" href="servo_8h.html#a8ffc7cb004bee65f4be763b6ed3d1cc6">increase_servo_val</a>(<span class="keywordtype">int</span> inc_val, <span class="keywordtype">int</span> curr_val, <span class="keywordtype">int</span> max_val, <span class="keywordtype">int</span> min_val);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">int</span> <a class="code hl_function" href="servo_8h.html#a487d829d8d1a734208e45e61f6e3192d">decrease_servo_val</a>(<span class="keywordtype">int</span> dec_val, <span class="keywordtype">int</span> curr_val, <span class="keywordtype">int</span> max_val, <span class="keywordtype">int</span> min_val);</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keywordtype">int</span> <a class="code hl_function" href="servo_8h.html#aa90dd12447f809277609b5d691482ef0">custom_servo_val</a>(<span class="keywordtype">int</span> new_val, <span class="keywordtype">int</span> curr_val, <span class="keywordtype">int</span> max_val, <span class="keywordtype">int</span> min_val);</div>
-<div class="ttc" id="aservo_8h_html_a487d829d8d1a734208e45e61f6e3192d"><div class="ttname"><a href="servo_8h.html#a487d829d8d1a734208e45e61f6e3192d">decrease_servo_val</a></div><div class="ttdeci">int decrease_servo_val(int dec_val, int curr_val, int max_val, int min_val)</div><div class="ttdef"><b>Definition</b> servo.c:64</div></div>
-<div class="ttc" id="aservo_8h_html_a8ffc7cb004bee65f4be763b6ed3d1cc6"><div class="ttname"><a href="servo_8h.html#a8ffc7cb004bee65f4be763b6ed3d1cc6">increase_servo_val</a></div><div class="ttdeci">int increase_servo_val(int inc_val, int curr_val, int max_val, int min_val)</div><div class="ttdef"><b>Definition</b> servo.c:53</div></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">int</span> <a class="code hl_function" href="servo_8h.html#aec177b83782416ac6de173870f07ace7">set_servo_val</a>(<span class="keywordtype">int</span> val, <span class="keywordtype">int</span> max_val, <span class="keywordtype">int</span> min_val);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">int</span> <a class="code hl_function" href="servo_8h.html#a8ffc7cb004bee65f4be763b6ed3d1cc6">increase_servo_val</a>(<span class="keywordtype">int</span> inc_val, <span class="keywordtype">int</span> curr_val, <span class="keywordtype">int</span> max_val, <span class="keywordtype">int</span> min_val);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">int</span> <a class="code hl_function" href="servo_8h.html#a487d829d8d1a734208e45e61f6e3192d">decrease_servo_val</a>(<span class="keywordtype">int</span> dec_val, <span class="keywordtype">int</span> curr_val, <span class="keywordtype">int</span> max_val, <span class="keywordtype">int</span> min_val);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keywordtype">int</span> <a class="code hl_function" href="servo_8h.html#aa90dd12447f809277609b5d691482ef0">custom_servo_val</a>(<span class="keywordtype">int</span> new_val, <span class="keywordtype">int</span> curr_val, <span class="keywordtype">int</span> max_val, <span class="keywordtype">int</span> min_val);</div>
+<div class="ttc" id="aservo_8h_html_a487d829d8d1a734208e45e61f6e3192d"><div class="ttname"><a href="servo_8h.html#a487d829d8d1a734208e45e61f6e3192d">decrease_servo_val</a></div><div class="ttdeci">int decrease_servo_val(int dec_val, int curr_val, int max_val, int min_val)</div><div class="ttdef"><b>Definition</b> servo.c:72</div></div>
+<div class="ttc" id="aservo_8h_html_a8ffc7cb004bee65f4be763b6ed3d1cc6"><div class="ttname"><a href="servo_8h.html#a8ffc7cb004bee65f4be763b6ed3d1cc6">increase_servo_val</a></div><div class="ttdeci">int increase_servo_val(int inc_val, int curr_val, int max_val, int min_val)</div><div class="ttdef"><b>Definition</b> servo.c:61</div></div>
 <div class="ttc" id="aservo_8h_html_aa90dd12447f809277609b5d691482ef0"><div class="ttname"><a href="servo_8h.html#aa90dd12447f809277609b5d691482ef0">custom_servo_val</a></div><div class="ttdeci">int custom_servo_val(int new_val, int curr_val, int max_val, int min_val)</div><div class="ttdef"><b>Definition</b> servo.c:43</div></div>
 <div class="ttc" id="aservo_8h_html_aec177b83782416ac6de173870f07ace7"><div class="ttname"><a href="servo_8h.html#aec177b83782416ac6de173870f07ace7">set_servo_val</a></div><div class="ttdeci">int set_servo_val(int val, int max_val, int min_val)</div><div class="ttdef"><b>Definition</b> servo.c:32</div></div>
 <div class="ttc" id="aservo_8h_html_af09405151af3dd02f09add6e8c618fb3"><div class="ttname"><a href="servo_8h.html#af09405151af3dd02f09add6e8c618fb3">setup_servo_timer</a></div><div class="ttdeci">void setup_servo_timer(int ccr2)</div><div class="ttdef"><b>Definition</b> servo.c:4</div></div>
@@ -123,7 +127,7 @@ $(function(){initNavTree('servo_8h_source.html',''); initResizable(true); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_9e94c91128f2402217e3120e64a4fd79.html">servo</a></li><li class="navelem"><a class="el" href="servo_8h.html">servo.h</a></li>
+    <li class="navelem"><a class="el" href="dir_1bcea10d60cb58501dd74b8952fc1655.html">enel869</a></li><li class="navelem"><a class="el" href="dir_0dfab01d7c496a7ab77f0bde688f2d17.html">Project</a></li><li class="navelem"><a class="el" href="dir_c5343973af58fc240f1a1fd76af218bc.html">code</a></li><li class="navelem"><a class="el" href="dir_428f05a924c590164b2b44b4068eda22.html">servo</a></li><li class="navelem"><a class="el" href="servo_8h.html">servo.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
   </ul>
 </div>

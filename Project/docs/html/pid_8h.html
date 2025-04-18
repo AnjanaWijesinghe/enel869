@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ball height controller: pid/pid.h File Reference</title>
+<title>Ball height controller: enel869/Project/code/pid/pid.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,7 +104,7 @@ $(function(){initNavTree('pid_8h.html',''); initResizable(true); });
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">pid.h File Reference</div></div>
 </div><!--header-->
@@ -113,9 +113,8 @@ $(function(){initNavTree('pid_8h.html',''); initResizable(true); });
 <p><a href="pid_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
+Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_p_i_d___param__t.html">PID_Param_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">PID parameters.  <a href="struct_p_i_d___param__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -124,7 +123,7 @@ Functions</h2></td></tr>
 <tr class="separator:a1bc16ed41702e0d7eead8bd1619804ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabbca2c8b2d09ca53e04d3c9fd5c0016" id="r_aabbca2c8b2d09ca53e04d3c9fd5c0016"><td class="memItemLeft" align="right" valign="top"><a id="aabbca2c8b2d09ca53e04d3c9fd5c0016" name="aabbca2c8b2d09ca53e04d3c9fd5c0016"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_pid</b> (struct <a class="el" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par)</td></tr>
-<tr class="memdesc:aabbca2c8b2d09ca53e04d3c9fd5c0016"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset PID values (does not affect p, i, and d). <br /></td></tr>
+<tr class="memdesc:aabbca2c8b2d09ca53e04d3c9fd5c0016"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset PID values (does not affect p, i, and d constants). <br /></td></tr>
 <tr class="separator:aabbca2c8b2d09ca53e04d3c9fd5c0016"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b5007ae9541bed8dc20f6104de8c107" id="r_a4b5007ae9541bed8dc20f6104de8c107"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b5007ae9541bed8dc20f6104de8c107">PID_Calculation</a> (struct <a class="el" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, int input_error, int sampling_rate)</td></tr>
 <tr class="separator:a4b5007ae9541bed8dc20f6104de8c107"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,8 +131,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_pid</b> (struct
 <tr class="separator:a62b36219fee9983f734ae1ecc49d9f5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dc688d4ea6d351ba3b262b196d71075" id="r_a1dc688d4ea6d351ba3b262b196d71075"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1dc688d4ea6d351ba3b262b196d71075">PID_Calculation_c</a> (struct <a class="el" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, int input_error, int sampling_rate)</td></tr>
 <tr class="separator:a1dc688d4ea6d351ba3b262b196d71075"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a608ca12cdce6f25c4c3aea4cab8872e6" id="r_a608ca12cdce6f25c4c3aea4cab8872e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a608ca12cdce6f25c4c3aea4cab8872e6">PID_map</a> (struct <a class="el" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, int servo_max, int servo_min)</td></tr>
-<tr class="separator:a608ca12cdce6f25c4c3aea4cab8872e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a200c0a1064b27e3be310f25c3594886d" id="r_a200c0a1064b27e3be310f25c3594886d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a200c0a1064b27e3be310f25c3594886d">PID_map</a> (struct <a class="el" href="struct_p_i_d___param__t.html">PID_Param_t</a> *par, int max_v, int min_v, int servo_max, int servo_min)</td></tr>
+<tr class="separator:a200c0a1064b27e3be310f25c3594886d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabbd00a8e31938c588a1859807eba679" id="r_aabbd00a8e31938c588a1859807eba679"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aabbd00a8e31938c588a1859807eba679">simple_step_calculation</a> (int curr_val, int input_error, int step_len)</td></tr>
 <tr class="separator:aabbd00a8e31938c588a1859807eba679"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -240,8 +239,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_pid</b> (struct
 
 </div>
 </div>
-<a id="a608ca12cdce6f25c4c3aea4cab8872e6" name="a608ca12cdce6f25c4c3aea4cab8872e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a608ca12cdce6f25c4c3aea4cab8872e6">&#9670;&#160;</a></span>PID_map()</h2>
+<a id="a200c0a1064b27e3be310f25c3594886d" name="a200c0a1064b27e3be310f25c3594886d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a200c0a1064b27e3be310f25c3594886d">&#9670;&#160;</a></span>PID_map()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -250,6 +249,16 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_pid</b> (struct
           <td class="memname">void PID_map </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="struct_p_i_d___param__t.html">PID_Param_t</a> *</td>          <td class="paramname"><span class="paramname"><em>par</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>max_v</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>min_v</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -353,7 +362,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_pid</b> (struct
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_92a1a7c0ab61b5eb55ed2567221d2809.html">pid</a></li><li class="navelem"><a class="el" href="pid_8h.html">pid.h</a></li>
+    <li class="navelem"><a class="el" href="dir_1bcea10d60cb58501dd74b8952fc1655.html">enel869</a></li><li class="navelem"><a class="el" href="dir_0dfab01d7c496a7ab77f0bde688f2d17.html">Project</a></li><li class="navelem"><a class="el" href="dir_c5343973af58fc240f1a1fd76af218bc.html">code</a></li><li class="navelem"><a class="el" href="dir_efb7259e7cd63cb3727001460fb92025.html">pid</a></li><li class="navelem"><a class="el" href="pid_8h.html">pid.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
   </ul>
 </div>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ball height controller: pid/moving_average_filter.h File Reference</title>
+<title>Ball height controller: enel869/Project/code/pid/moving_average_filter.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,7 +104,7 @@ $(function(){initNavTree('moving__average__filter_8h.html',''); initResizable(tr
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">moving_average_filter.h File Reference</div></div>
@@ -114,9 +114,8 @@ $(function(){initNavTree('moving__average__filter_8h.html',''); initResizable(tr
 <p><a href="moving__average__filter_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
+Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmov__avg__filter.html">mov_avg_filter</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moving average filter.  <a href="structmov__avg__filter.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -131,6 +130,8 @@ Functions</h2></td></tr>
 <tr class="separator:a3427f0d5fd5a033755a2ecdc82061c1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade4757fd4541a83f2b925917b3ac63f9" id="r_ade4757fd4541a83f2b925917b3ac63f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade4757fd4541a83f2b925917b3ac63f9">apply_average_filter</a> (struct <a class="el" href="structmov__avg__filter.html">mov_avg_filter</a> *instance, int input, int *out)</td></tr>
 <tr class="separator:ade4757fd4541a83f2b925917b3ac63f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a404ae3aee9822c98770d1ae5313e4b39" id="r_a404ae3aee9822c98770d1ae5313e4b39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a404ae3aee9822c98770d1ae5313e4b39">apply_median_filter</a> (struct <a class="el" href="structmov__avg__filter.html">mov_avg_filter</a> *instance, int input, int *out)</td></tr>
+<tr class="separator:a404ae3aee9822c98770d1ae5313e4b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ade4757fd4541a83f2b925917b3ac63f9" name="ade4757fd4541a83f2b925917b3ac63f9"></a>
@@ -156,7 +157,41 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Apply filter </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Apply mean average filter </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filter</td><td>filter </td></tr>
+    <tr><td class="paramname">input</td><td>Input </td></tr>
+    <tr><td class="paramname">*out</td><td>Filtered output </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a404ae3aee9822c98770d1ae5313e4b39" name="a404ae3aee9822c98770d1ae5313e4b39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a404ae3aee9822c98770d1ae5313e4b39">&#9670;&#160;</a></span>apply_median_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void apply_median_filter </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmov__avg__filter.html">mov_avg_filter</a> *</td>          <td class="paramname"><span class="paramname"><em>instance</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>input</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>out</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Apply median average filter </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filter</td><td>filter </td></tr>
     <tr><td class="paramname">input</td><td>Input </td></tr>
@@ -181,7 +216,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Resets filter. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Resets moving filter. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">filter</td><td>filter </td></tr>
   </table>
@@ -195,7 +230,7 @@ Functions</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_92a1a7c0ab61b5eb55ed2567221d2809.html">pid</a></li><li class="navelem"><a class="el" href="moving__average__filter_8h.html">moving_average_filter.h</a></li>
+    <li class="navelem"><a class="el" href="dir_1bcea10d60cb58501dd74b8952fc1655.html">enel869</a></li><li class="navelem"><a class="el" href="dir_0dfab01d7c496a7ab77f0bde688f2d17.html">Project</a></li><li class="navelem"><a class="el" href="dir_c5343973af58fc240f1a1fd76af218bc.html">code</a></li><li class="navelem"><a class="el" href="dir_efb7259e7cd63cb3727001460fb92025.html">pid</a></li><li class="navelem"><a class="el" href="moving__average__filter_8h.html">moving_average_filter.h</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
   </ul>
 </div>

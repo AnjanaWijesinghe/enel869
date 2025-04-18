@@ -104,36 +104,40 @@ $(function(){initNavTree('structmov__avg__filter.html',''); initResizable(true);
 
 <div class="header">
   <div class="summary">
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structmov__avg__filter-members.html">List of all members</a>  </div>
+<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle"><div class="title">mov_avg_filter Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Moving average filter.  
- <a href="#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="moving__average__filter_8h_source.html">moving_average_filter.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a0c0d455209b8dd6590953e169cfe32e6" id="r_a0c0d455209b8dd6590953e169cfe32e6"><td class="memItemLeft" align="right" valign="top"><a id="a0c0d455209b8dd6590953e169cfe32e6" name="a0c0d455209b8dd6590953e169cfe32e6"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:ad5e57e245744e445b7ecb69758ef491e" id="r_ad5e57e245744e445b7ecb69758ef491e"><td class="memItemLeft" align="right" valign="top"><a id="ad5e57e245744e445b7ecb69758ef491e" name="ad5e57e245744e445b7ecb69758ef491e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> [MOVING_AVERAGE_LENGTH]</td></tr>
-<tr class="separator:a0c0d455209b8dd6590953e169cfe32e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4bea0297b5df618a2d8a0641ac3169e" id="r_ae4bea0297b5df618a2d8a0641ac3169e"><td class="memItemLeft" align="right" valign="top"><a id="ae4bea0297b5df618a2d8a0641ac3169e" name="ae4bea0297b5df618a2d8a0641ac3169e"></a>
+<tr class="separator:ad5e57e245744e445b7ecb69758ef491e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a617a47c70795bcff659815ad0efd2266" id="r_a617a47c70795bcff659815ad0efd2266"><td class="memItemLeft" align="right" valign="top"><a id="a617a47c70795bcff659815ad0efd2266" name="a617a47c70795bcff659815ad0efd2266"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>counter</b></td></tr>
-<tr class="separator:ae4bea0297b5df618a2d8a0641ac3169e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88fa7c5ccafc744fbf7fe5fa650e6811" id="r_a88fa7c5ccafc744fbf7fe5fa650e6811"><td class="memItemLeft" align="right" valign="top"><a id="a88fa7c5ccafc744fbf7fe5fa650e6811" name="a88fa7c5ccafc744fbf7fe5fa650e6811"></a>
+<tr class="separator:a617a47c70795bcff659815ad0efd2266"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8000eda101cade7c6c4b913fce0cc9c" id="r_aa8000eda101cade7c6c4b913fce0cc9c"><td class="memItemLeft" align="right" valign="top"><a id="aa8000eda101cade7c6c4b913fce0cc9c" name="aa8000eda101cade7c6c4b913fce0cc9c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>out</b></td></tr>
-<tr class="separator:a88fa7c5ccafc744fbf7fe5fa650e6811"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfbcf728f18dfe260f59ab0046a7986d" id="r_acfbcf728f18dfe260f59ab0046a7986d"><td class="memItemLeft" align="right" valign="top"><a id="acfbcf728f18dfe260f59ab0046a7986d" name="acfbcf728f18dfe260f59ab0046a7986d"></a>
+<tr class="separator:aa8000eda101cade7c6c4b913fce0cc9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a930b83edda39ee8cfa78dd4574a50bc3" id="r_a930b83edda39ee8cfa78dd4574a50bc3"><td class="memItemLeft" align="right" valign="top"><a id="a930b83edda39ee8cfa78dd4574a50bc3" name="a930b83edda39ee8cfa78dd4574a50bc3"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>sum</b></td></tr>
-<tr class="separator:acfbcf728f18dfe260f59ab0046a7986d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a930b83edda39ee8cfa78dd4574a50bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Moving average filter. </p>
+<div class="textblock"><p>Moving average filter This keeps a buffer of lenght 5 [MOVING_AVERAGE_FILTER] and then applies typr of filter required to get an average from them </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>buffer containing the values </td></tr>
+    <tr><td class="paramname">counter</td><td>keep track of the location of the last value added </td></tr>
+    <tr><td class="paramname">out</td><td>average of the buffer </td></tr>
+    <tr><td class="paramname">sum</td><td>sum of the buffer </td></tr>
+  </table>
+  </dd>
+</dl>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>pid/<a class="el" href="moving__average__filter_8h_source.html">moving_average_filter.h</a></li>
+<li>enel869/Project/code/pid/<a class="el" href="moving__average__filter_8h_source.html">moving_average_filter.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -6,7 +6,7 @@ var cli_8h =
     [ "print_debug_header", "cli_8h.html#a71289c3489aeaad1bf5ce9975fa3cfcc", null ],
     [ "print_ir_only", "cli_8h.html#ad10c88a392b02908cca3ca9dacbab009", null ],
     [ "print_main_header", "cli_8h.html#aaff70ee0760ddd0f3dcb726c5afa27fc", null ],
-    [ "print_values", "cli_8h.html#a1f04884bb00ed684939a0c6950d20f0a", null ],
+    [ "print_values", "cli_8h.html#ab878a65bfd9cad8b8e1cee849ef0fbdf", null ],
     [ "read_ch_usart2", "cli_8h.html#ac5dcd5cf0bce5fd6e6228b5471658242", null ],
     [ "read_float", "cli_8h.html#ae325714126832a42ffe7cca204819598", null ],
     [ "read_int", "cli_8h.html#af310540093ee953c3018bc13bbde3da5", null ],
