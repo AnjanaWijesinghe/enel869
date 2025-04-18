@@ -441,11 +441,6 @@
               <FilePath>.\code\pid\moving_average_filter.c</FilePath>
             </File>
             <File>
-              <FileName>moving_average_filter.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\code\pid\moving_average_filter.h</FilePath>
-            </File>
-            <File>
               <FileName>initialize_for_ir_range.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\code\utils\initialize_for_ir_range.c</FilePath>
@@ -455,6 +450,11 @@
         <Group>
           <GroupName>Headers</GroupName>
           <Files>
+            <File>
+              <FileName>moving_average_filter.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\code\pid\moving_average_filter.h</FilePath>
+            </File>
             <File>
               <FileName>main.h</FileName>
               <FileType>5</FileType>
