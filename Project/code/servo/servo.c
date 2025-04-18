@@ -43,6 +43,14 @@ int set_servo_val(int val, int max_val, int min_val)
 int custom_servo_val(int new_val, int curr_val, int max_val, int min_val)
 {
 	// set servo to custom value within bounds
+	if (new_val > max_val)
+	{
+		new_val = max_val;
+	}
+	else if (new_val < min_val)
+	{
+		new_val = min_val;
+	}
 	if(set_servo_val(new_val, max_val, min_val) == 1)
 	{
 		return new_val;

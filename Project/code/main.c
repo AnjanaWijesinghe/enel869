@@ -15,6 +15,7 @@
 #include "utils/initialize_for_ir_range.h"
 
 int adc_val = 0;
+int adc_raw_val = 0;
 char global_rxb;
 
 struct PID_Param_t pid;
@@ -27,17 +28,21 @@ char version[] = VERSION;
 int machine_state = 1;
 
 // setting default servo values
-int servo_max = 2600;
-int servo_min = 1900;
-int servo_val = 2000;
+int servo_max = 2700;
+int servo_min =2300;
+int servo_val = 2350;
+
+int pid_limiter = 200;
+int sampling_rate = 100;
 
 // required height in IR value
-int required_height = 2600;
+int required_height = 2400;
 
 void ADC1_2_IRQHandler() 
 {
-	//adc_val = ADC1->DR;
-	apply_average_filter(&mov_avg_instance, ADC1->DR, &adc_val);
+	adc_raw_val = ADC1->DR;
+	apply_average_filter(&mov_avg_instance, adc_raw_val, &adc_val);
+	//apply_median_filter(&mov_avg_instance, adc_raw_val, &adc_val);
 	//while( !( USART2->SR & USART_SR_TXE ) ) {};
 	//USART2->DR = adc_val;
 	
@@ -117,27 +122,39 @@ void debug_menu()
 			break;
 		case 49:
 			write_str_usart2("Set Kp value: ");
-			// s entered
+			// 1 entered
 			// set servo value
 			pid.Kp = read_float();
 			break;
 		case 50:
 			write_str_usart2("Set Ki value: ");
-			// s entered
+			// 2 entered
 			// set servo value
 			pid.Ki = read_float();
 			break;
 		case 51:
 			write_str_usart2("Set Kd value: ");
-			// s entered
+			// 3 entered
 			// set servo value
 			pid.Kd = read_float();
 			break;
 		case 97:
 			write_str_usart2("Set height value in IR: ");
-			// s entered
+			// a entered
 			// set servo value
 			required_height = read_int();
+			break;
+		case 119:
+			write_str_usart2("Sampling rate: ");
+			// w entered
+			// set sampling rate
+			sampling_rate = read_int();
+			break;
+		case 122:
+			write_str_usart2("PID limiter: ");
+			// z entered
+			// set sampling rate
+			pid_limiter = read_int();
 			break;
 	}
 	// set the machine back into normal state
@@ -208,22 +225,21 @@ int main(void)
 	//calibrate_ball_height(2700, 2388, 1000);
 	// reset servo
 	int input_error = 0;
-	int sampling_rate = 100;
-	servo_val = custom_servo_val(servo_max, servo_val, servo_max, servo_min);
+	servo_val = custom_servo_val(servo_val, servo_val, servo_max, servo_min);
 	while (1) 
 	{
-		input_error = adc_val - required_height;
-		print_values(machine_state, servo_val, servo_max, servo_min, adc_val, required_height, pid.Kp, pid.Ki, pid.Kd, pid.output, input_error);
-		
+		input_error = required_height - adc_raw_val;
+		print_values(machine_state, servo_val, servo_max, servo_min, adc_val, required_height, pid.Kp, pid.Ki, pid.Kd, pid.output, pid.output_mapped, input_error);
+		//TDelay_Millis(100);
 		if(machine_state == 0)
 		{
 			// PID mode
 			// calculating PID
-			PID_Calculation_c(&pid, input_error, sampling_rate);
+			PID_Calculation(&pid, input_error, sampling_rate);
 			// limiting the pid to the given range
-			PID_map(&pid, 50, -50);
+			PID_map(&pid, pid_limiter, -pid_limiter, servo_max, servo_min);
 			// setting servo value
-			servo_val = custom_servo_val(pid.output_mapped, servo_val, servo_max, servo_min);
+			servo_val = custom_servo_val(servo_val - pid.output_mapped, servo_val, servo_max, servo_min);
 			
 			TDelay_Millis(sampling_rate);
 		}
@@ -263,6 +279,7 @@ int main(void)
 				case 113:
 					// q to enter debug mode
 					debug_menu();
+					print_main_header(version);
 					break;
 				case 101:
 					// e to change to pid mode
@@ -277,6 +294,13 @@ int main(void)
 		else
 		{
 			// limbo mode
+			// PID mode
+			// calculating PID
+			//PID_Calculation(&pid, input_error, sampling_rate);
+			// limiting the pid to the given range
+			//PID_map(&pid, pid_limiter, -pid_limiter, servo_max, servo_min);
+			
+			TDelay_Millis(100);
 		}
 	}   
 }

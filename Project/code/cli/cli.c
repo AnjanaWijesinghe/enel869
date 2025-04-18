@@ -189,6 +189,12 @@ void print_debug_header(char version[])
 	write_str_usart2("#3 - set Kd (/1000)");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
+	write_str_usart2("w - set sampling rate");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
+	write_str_usart2("z - set PID limiter");
+	write_ch_usart2('\n');
+	write_ch_usart2('\r');
 	write_str_usart2("To enter PID mode, press e after exiting debug menu");
 	write_ch_usart2('\n');
 	write_ch_usart2('\r');
@@ -231,7 +237,7 @@ void print_main_header(char version[])
 	write_ch_usart2('\r');
 }
 
-void print_values(int machine_state, int curr_servo, int max_servo, int min_servo, int curr_ir, int req_ir, float kp, float ki, float kd, int pid, int pid_mapped)
+void print_values(int machine_state, int curr_servo, int max_servo, int min_servo, int curr_ir, int req_ir, float kp, float ki, float kd, int pid, int pid_mapped, int input_error)
 {
 	// print the running values
 
@@ -246,6 +252,7 @@ void print_values(int machine_state, int curr_servo, int max_servo, int min_serv
 	char kd_str[10];
 	char pid_str[10];
 	char pid_mapped_str[10];
+	char error_str[10];
 	
 	sprintf(machine_state_str,"%d",machine_state);
 	sprintf(curr_servo_str,"%d",curr_servo);
@@ -258,6 +265,7 @@ void print_values(int machine_state, int curr_servo, int max_servo, int min_serv
 	sprintf(kd_str,"%f",kd);
 	sprintf(pid_str,"%d",pid);
 	sprintf(pid_mapped_str,"%d",pid_mapped);
+	sprintf(error_str,"%d",input_error);
 	
 	//write_ch_usart2('\n');
 	write_str_usart2("Mode: ");
@@ -266,8 +274,6 @@ void print_values(int machine_state, int curr_servo, int max_servo, int min_serv
 	write_str_usart2(max_servo_str);
 	write_str_usart2(" | Servo Min: ");
 	write_str_usart2(min_servo_str);
-	//write_ch_usart2('\n');
-	//write_ch_usart2('\r');
 	write_str_usart2(" | Servo val: ");
 	write_str_usart2(curr_servo_str);
 	write_str_usart2(" | IR val: ");
@@ -284,6 +290,8 @@ void print_values(int machine_state, int curr_servo, int max_servo, int min_serv
 	write_str_usart2(pid_str);
 	write_str_usart2(" = ");
 	write_str_usart2(pid_mapped_str);
+	write_str_usart2(" | E: ");
+	write_str_usart2(error_str);	
 	write_str_usart2(" // EOL");
 	//write_ch_usart2('\n');
 	write_ch_usart2('\r');
